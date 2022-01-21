@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'dramas/index'
   devise_for :users
   root 'comments#index'
   get 'comments/index'
