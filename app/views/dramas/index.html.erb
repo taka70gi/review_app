@@ -1,14 +1,23 @@
 <% if flash[:notice] %>
   <p class="notice"><%= flash[:notice] %></p>
 <% end %>
+<h2>ドラマ一覧</h2>
+<div class="list">
+  <% @dramas.each do |drama| %>
+    <div class="recommend_img img_50 img_25">
+        <% if drama.image.attached? %>
+          <%= link_to (image_tag drama.image, class: "drama_img"), drama %>
+        <% end %>
+        <div><%= drama.name %></div>
+    </div>
+  <% end %>
+</div>
+
 <table>
   <thead>
     <tr>
-      <th>id</th>
-      <th>名前</th>
-      <th>公開日</th>
-      <th>あらすじ</th>
-      <th>キャスト</th>
+      <th>参照</th>
+      <th>編集</th>
       <th>削除</th>
     </tr>
   </thead>
@@ -16,13 +25,11 @@
   <tbody>
     <% @dramas.each do |drama| %>
       <tr>
-        <td><%= drama.id %></td>
-        <td><%= drama.name %></td>
-        <td><%= drama.release_day %></td>
-        <td><%= drama.summary %></td>
-        <td><%= drama.cast %></td>
         <td>
           <%= link_to "参照", drama %>
+        </td>
+        <td>
+          <%= link_to "編集", [:edit, drama] %>
         </td>
         <td>
           <%= link_to "削除", drama, method: :delete, data: { confirm: "本当に削除しますか？" } %>
