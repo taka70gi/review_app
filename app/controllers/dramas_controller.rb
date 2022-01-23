@@ -22,6 +22,20 @@ class DramasController < ApplicationController
     end
   end
 
+  def edit
+    @drama = Drama.find(params[:id])
+  end
+
+  def update
+    @drama = Drama.find(params[:id])
+    if @drama.update(dramas_params)
+      flash[:notice] = "ユーザーIDが「#{@drama.id}」の情報を更新しました"
+      redirect_to :dramas
+    else
+      render "edit"
+    end
+  end
+
   def destroy
     @drama = Drama.find(params[:id])
     @drama.destroy
