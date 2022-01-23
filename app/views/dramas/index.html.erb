@@ -1,2 +1,33 @@
-<h1>Dramas#index</h1>
-<p>Find me in app/views/dramas/index.html.erb</p>
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>名前</th>
+      <th>公開日</th>
+      <th>あらすじ</th>
+      <th>キャスト</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dramas.each do |drama| %>
+      <tr>
+        <td><%= drama.id %></td>
+        <td><%= drama.name %></td>
+        <td><%= drama.release_day %></td>
+        <td><%= drama.summary %></td>
+        <td><%= drama.cast %></td>
+        <td>
+          <%= link_to "参照", drama %>
+        </td>
+        <td>
+          <%= link_to "削除", drama, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
