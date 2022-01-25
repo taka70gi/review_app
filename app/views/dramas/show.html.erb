@@ -1,21 +1,25 @@
 <section class="mainContent">
 
-
-  <div class="container">
-    <div class="drama_left">
-      <% if @drama.image.attached? %>
-        <%= image_tag @drama.image, class: "drama_img" %>
-      <% end %>
-    </div>
-    <div class="drama_right">
-    <h2><%= @drama.name %>(<%= @drama.release_day %>)</h2>
-      <div class="mybox">
-        <div><%= @drama.summary %></div>
+<div class="layout_back">
+  <div class="layout_position">
+    <div class="layout_item_back dark_color">
+      <div class="container">
+        <div class="drama_left">
+          <% if @drama.image.attached? %>
+            <%= image_tag @drama.image, class: "drama_img" %>
+          <% end %>
+        </div>
+        <div class="drama_right font_white">
+          <h2 class="color_gold"><%= @drama.name %>(<%= @drama.release_day %>)</h2>
+          <h5 class="summary_head">あらすじ</h5>
+          <div><%= @drama.summary %></div>
+          <h5 class="summary_head">出演者</h5>
+          <div><%= @drama.cast %></div>
+        </div>
       </div>
-      <h5 class="summary_head">出演者</h5>
-      <div><%= @drama.cast %></div>
     </div>
   </div>
+</div>
 
   <div>
     <ul>

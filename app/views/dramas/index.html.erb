@@ -1,16 +1,20 @@
 <% if flash[:notice] %>
   <p class="notice"><%= flash[:notice] %></p>
 <% end %>
-<h2>ドラマ一覧</h2>
-<div class="list">
-  <% @dramas.each do |drama| %>
-    <div class="recommend_img img_50 img_40 img_30 img_20">
-        <% if drama.image.attached? %>
-          <%= link_to (image_tag drama.image, class: "drama_img"), drama %>
-        <% end %>
-        <div><%= drama.name %></div>
+<div class="layout_back">
+  <h2>ドラマ一覧</h2>
+  <div class="layout_wide dark_color">
+    <div class="list">
+      <% @dramas.each do |drama| %>
+        <div class="recommend_img img_50 img_30 img_20 img_10">
+            <% if drama.image.attached? %>
+              <%= link_to (image_tag drama.image, class: "drama_img"), drama %>
+            <% end %>
+            <div class="color_gold name_size"><%= drama.name %></div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
 
 <table>
