@@ -21,6 +21,9 @@ class CommentsController < ApplicationController
   end
 
   def show
+    @user = current_user
+    @comment = Comment.new
+    @drama = Drama.find(params[:drama_id])
   end
 
   def edit

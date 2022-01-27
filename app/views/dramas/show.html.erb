@@ -18,26 +18,24 @@
       </div>
     </div>
   </div>
-  <div class="layout_position">
-    <div class="layout_item_back dark_color white_color">
-      <table>
-        <tbody>
-          <% @drama.comments.each do |comment| %>
-            <tr>
-              <td><%= @users.find(comment.user_id).name %></td>
-              <td><%= comment.content %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <% @drama.comments.each do |comment| %>
+    <div class="layout_position">
+      <div class="layout_item_back white_color dark_color_position">
+        <table class="font_purple">
+          <tr>
+            <td class="comment_name td_height"><%= @users.find(comment.user_id).name %></td>
+            <td class="comment_comment"><%= comment.content %></td>
+          </tr>
+        </table>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
   <div>
     <ul>
       <li><%= link_to "一覧に戻る", :dramas %></li>
-      <li><%= link_to "一覧に戻る", user_path(@drama, drama_id: @drama.id) %></li>
+      <li><%= link_to "一覧に戻る", comment_path(@drama, drama_id: @drama.id) %></li>
     </ul>
   </div>
 </section>

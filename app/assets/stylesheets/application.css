@@ -13,7 +13,10 @@
  *= require_tree .
  *= require_self
  */
-
+html{
+  font-family: 游ゴシック;
+  font-size: 16px;
+}
 header {
   height: 50px;
   padding: 4px 30px;
@@ -24,7 +27,13 @@ footer {
   padding: 4px 30px;
   background-color: #000000;
 }
-
+table{
+  border-spacing: 0;
+}
+td{
+  border: 1px #6353b3 solid;
+  word-break: break-all;
+}
 .drama_img {
   width: 180px;
   height: 250px;
@@ -94,6 +103,10 @@ footer {
   border-style: groove;
   height: 20px;
 }
+.area_size{
+  width: 300px;
+  height: 120px;
+}
 .btn{
   display: inline-block;
   text-align: center;
@@ -105,6 +118,11 @@ footer {
 .btn_color{
   color: #fff;
   background-color: #6353b3;
+  border: none;
+}
+.btn_color_purple {
+  color: #fff;
+  background-color: #9149AA;
   border: none;
 }
 .padding_position{
