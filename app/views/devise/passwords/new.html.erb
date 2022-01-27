@@ -1,6 +1,6 @@
 <div class="layout_back">
   <div class="layout_position">
-    <div class="layout_item_back white_color font_purple">
+    <div class="layout_item_back white_color font_purple login_wide">
       <h2 class="text_center">パスワードをお忘れの場合</h2>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
