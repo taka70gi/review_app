@@ -13,6 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+header {
+  height: 50px;
+  padding: 4px 30px;
+  background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+}
+footer {
+  height: 50px;
+  padding: 4px 30px;
+  background-color: #000000;
+}
+
 .drama_img {
   width: 180px;
   height: 250px;
@@ -24,7 +36,7 @@
   display: flex;
   flex-direction: column;
 }
-@media (min-width: 600px){
+@media (min-width: 800px){
   .container {
     flex-direction: row;
   }
@@ -50,16 +62,14 @@
 .font_purple{
   color: #6353b3;
 }
+.text_center{
+  text-align: center;
+}
 .layout_wide {
   padding: 60px;
   justify-content: center;
   display: flex;
-  margin: 60px;
 }
-.text_center{
-  text-align: center;
-}
-
 .layout_position {
   display: flex;
   position: relative;
@@ -70,9 +80,12 @@
 .layout_item_back{
   padding: 20px;
   border-radius: 10px;
-  width: 400px;
 }
 
+.login_wide
+{
+  width: 400px;
+}
 .field_size{
   width: 267px;
   border-color: #6353b3;
