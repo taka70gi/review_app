@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_080448) do
+ActiveRecord::Schema.define(version: 2022_01_26_122713) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,23 @@ ActiveRecord::Schema.define(version: 2022_01_23_080448) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "dramaid"
+  end
+
+  create_table "drama_comments", force: :cascade do |t|
+    t.integer "drama_id", null: false
+    t.integer "comment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_drama_comments_on_comment_id"
+    t.index ["drama_id"], name: "index_drama_comments_on_drama_id"
+  end
+
   create_table "dramas", force: :cascade do |t|
     t.string "name"
     t.string "summary"
@@ -64,4 +81,6 @@ ActiveRecord::Schema.define(version: 2022_01_23_080448) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "drama_comments", "comments"
+  add_foreign_key "drama_comments", "dramas"
 end

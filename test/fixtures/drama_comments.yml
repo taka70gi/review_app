@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  drama: one
+  comment: one
+
+two:
+  drama: two
+  comment: two
