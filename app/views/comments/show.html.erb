@@ -14,11 +14,13 @@
             <%= f.text_area :content, class: "area_size" %>
           </div>
           <%= f.hidden_field :user_id, value: @user.id %>
-          <%= f.hidden_field :dramaid, value: @drama.id %>
+          <%= f.hidden_field :drama_id, value: @drama.id %>
           <div class="text_center padding_position">
             <%= f.submit "レビューを投稿", class: "btn btn_color_purple" %>
           </div>
         <% end %>
+        <%= link_to "戻る", drama_path(@drama) %>
+        <%= link_to "一覧に戻る", :dramas %>
       </div>
     </div>
   </div>

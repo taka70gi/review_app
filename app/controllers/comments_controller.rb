@@ -1,20 +1,18 @@
 class CommentsController < ApplicationController
   def index
+    @user = current_user
+    @comments = @user.comments
   end
 
   def new
   end
 
   def create
-    binding.pry
-    @comment = Comment.new(params.require(:comment).permit(:content, :user_id, :dramaid, { drama_ids: [] }))
-    @drama = Drama.find(params[:comment][:dramaid])
-    binding.pry
+    @comment = Comment.new(params.require(:comment).permit(:content, :user_id, :drama_id))
+    @drama = Drama.find(params[:comment][:drama_id])
     if @comment.save
-      @comment.dramas << @drama
-      binding.pry
       flash[:notice] = "新規登録"
-      redirect_to :users
+      redirect_to drama_path(@drama)
     else
       render "comments"
     end
@@ -23,7 +21,7 @@ class CommentsController < ApplicationController
   def show
     @user = current_user
     @comment = Comment.new
-    @drama = Drama.find(params[:drama_id])
+    @drama = Drama.find(params[:id])
   end
 
   def edit
@@ -33,10 +31,14 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    flash[:notice] = "ユーザーを削除しました"
+    redirect_to :users
   end
   private
   def comments_params
-    params.require(:comment).permit(:content, :user_id, :dramaid)
+    params.require(:comment).permit(:content, :user_id, :drama_id)
   end
 
 

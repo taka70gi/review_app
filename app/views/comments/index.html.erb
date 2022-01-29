@@ -1,13 +1,28 @@
-<h1>ログインアプリ</h1>
-
-<% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
-  <!-- ユーザーがログインしていた時の処理 -->
-  <h2> 現在 <%= current_user.name %> さんがログインしています </h2> <!-- ここを追加します -->
-  <h4> メールアドレス： <%= current_user.email %> </h4>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
-<% else %>
-  <!-- ユーザーがログインしていなかった時の処理 -->
-  <h2> 現在ログインしていません </h2>
-  <%= link_to "ログイン", new_user_session_path, class: 'post' %> <!-- ログイン画面に移行する -->
-  <%= link_to "新規登録", new_user_registration_path, class: 'post' %> <!-- 新規登録画面に移行する -->
-<% end %>
+<div class="layout_back">
+  <div class="layout_position">
+    <div class="layout_item_back white_color dark_color_position">
+      <table class="font_purple">
+        <h2 class="text_center">コメント一覧</h2>
+        <% @comments.each do |comment| %>
+        <tr>
+          <td class="comment_name td_height">
+            <% if comment.drama.image.attached? %>
+              <%= image_tag comment.drama.image, class: "comment_icon" %>
+            <% end %>
+          </td>
+          <td class="comment_wide">
+            <div class="font_black"><%= comment.drama.name %></div>
+            <div><%= comment.content %></div>
+          </td>
+          <td class="coment_del_wide">
+            <div>
+              <%= link_to "削除", comment, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <%= link_to "戻る", users_path %>
+    </div>
+  </div>
+</div>
