@@ -1,0 +1,31 @@
+<div class="layout_back">
+  <div class="layout_position">
+    <div class="layout_item_back white_color font_purple">
+      <div class="user_wide">
+        <h2 class="text_center">プロフィール編集</h2>
+        <%= form_with model: @user do |f| %>
+          <div class="d_row">
+            <div class="user_left">
+              <% if @user.image.attached? %>
+                <%= image_tag @user.image, class: "user_icon" %>
+              <% else %>
+                <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
+              <% end %>
+              <div><%= f.label :image ,"変更" %></div>
+              <div><%= f.file_field :image, class: "d_none" %></div>
+            </div>
+            <div class="user_right">
+              <div><%= f.label :name ,"名前" %></div>
+              <div><%= f.text_field :name, class: "user_field" %></div>
+              <div><%= f.label :profile ,"自己紹介" %></div>
+              <div><%= f.text_area :profile, class: "area_size" %></div>
+            </div>
+          </div>
+          <div class="text_center padding_position">
+            <%= f.submit "更新", class: "btn btn_color_purple" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

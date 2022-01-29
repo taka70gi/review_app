@@ -1,0 +1,19 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.user_left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.user_right {
+  width: 300px;
+}
+.user_wide{
+  width: 400px;
+  padding: 0 50px;
+}
+.user_field{
+  width: 300px;
+}

@@ -1,18 +1,37 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
-<table>
-  <thead>
-    <tr>
-      <th>投稿内容</th>
-      <th>投稿者(User_id)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.content %></td>
-        <td><%= comment.user_id %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
+  <div class="layout_back">
+    <div class="layout_position">
+      <div class="layout_item_back white_color font_purple login_wide">
+        <h2 class="text_center">マイページ</h2>
+          <div class="d_row">
+            <div class="user_left">
+              <% if @user.image.attached? %>
+                <%= image_tag @user.image, class: "user_icon" %>
+              <% else %>
+                <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
+              <% end %>
+            </div>
+            <div class="user_right">
+              <h4 class="font_black"><%= @user.name %></h4>
+              <div class="profile_wide">
+                <%= @user.profile %>
+              </div>
+            </div>
+          </div>
+          <%= link_to "プロフィール編集", edit_user_path(@user) %>
+          <%= link_to "コメント一覧", comments_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ユーザーがログインしていた時の処理 -->
+  <h4> メールアドレス： <%= current_user.email %> </h4>
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
+<% else %>
+  <!-- ユーザーがログインしていなかった時の処理 -->
+  <h2> 現在ログインしていません </h2>
+  <%= link_to "ログイン", new_user_session_path, class: 'post' %> <!-- ログイン画面に移行する -->
+  <%= link_to "新規登録", new_user_registration_path, class: 'post' %> <!-- 新規登録画面に移行する -->
+<% end %>
