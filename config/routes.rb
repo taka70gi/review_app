@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'favorites/index'
   get 'users/index'
   get 'dramas/index'
   get 'comments/index'
@@ -8,4 +9,11 @@ Rails.application.routes.draw do
   resources :users
   resources :dramas
   resources :comments
+
+  resources :users, only: [:show, :edit, :update] do
+    get :favorites, on: :collection
+  end
+  resources :dramas, expect: [:index] do
+    resource :favorites, only: [:create, :destroy]
+  end
 end

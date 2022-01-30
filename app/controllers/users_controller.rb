@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
     @user = current_user
+    @favorites = Favorite.where(user_id: current_user.id)
   end
 
   def new
@@ -10,6 +11,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = current_user
+    @dramas = @user.dramas
+    favorites = Favorite.where(user_id: current_user.id).pluck(:drama_id)
   end
 
   def edit

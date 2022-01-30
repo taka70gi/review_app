@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_122713) do
+ActiveRecord::Schema.define(version: 2022_01_29_095308) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -45,16 +45,7 @@ ActiveRecord::Schema.define(version: 2022_01_26_122713) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "dramaid"
-  end
-
-  create_table "drama_comments", force: :cascade do |t|
-    t.integer "drama_id", null: false
-    t.integer "comment_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["comment_id"], name: "index_drama_comments_on_comment_id"
-    t.index ["drama_id"], name: "index_drama_comments_on_drama_id"
+    t.integer "drama_id"
   end
 
   create_table "dramas", force: :cascade do |t|
@@ -66,6 +57,15 @@ ActiveRecord::Schema.define(version: 2022_01_26_122713) do
     t.string "release_day"
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "drama_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["drama_id"], name: "index_favorites_on_drama_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -75,12 +75,13 @@ ActiveRecord::Schema.define(version: 2022_01_26_122713) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.string "profile"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "drama_comments", "comments"
-  add_foreign_key "drama_comments", "dramas"
+  add_foreign_key "favorites", "dramas"
+  add_foreign_key "favorites", "users"
 end
