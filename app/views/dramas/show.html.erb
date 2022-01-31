@@ -3,6 +3,7 @@
   <div class="layout_position">
     <div class="layout_item_back dark_color dark_color_position">
       <div class="container">
+
         <div class="drama_left">
           <% if @drama.image.attached? %>
             <%= image_tag @drama.image, class: "drama_img" %>
@@ -14,28 +15,49 @@
           <div><%= @drama.summary %></div>
           <h5 class="summary_head">出演者</h5>
           <div><%= @drama.cast %></div>
+          <div class="">
+            <% if @drama.favorited_by(current_user) %>
+              <%= link_to drama_favorites_path(@drama), method: :delete, class: "favorited_btn" do %>
+                <h4><span class="heart_red"></span> お気に入り登録済</h4>
+              <% end %>
+            <% else %>
+                <%= link_to drama_favorites_path(@drama), method: :drama, class: "no_favorited_btn" do %>
+                  <h4><span class="heart_white"></span> お気に入り登録</h4>
+                <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <% @drama.comments.each do |comment| %>
-    <div class="layout_position">
-      <div class="layout_item_back white_color dark_color_position">
+  <div class="layout_position">
+    <div class="layout_item_back white_color dark_color_position">
+      <% @drama.comments.each do |comment| %>
         <table class="font_purple">
           <tr>
-            <td class="comment_name td_height"><%= @users.find(comment.user_id).name %></td>
-            <td class="comment_comment"><%= comment.content %></td>
+            <td class="comment_name td_height">
+              <% if @users.find(comment.user_id).image.attached? %>
+                <%= image_tag @users.find(comment.user_id).image, class: "user_icon" %>
+              <% else %>
+                <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
+              <% end %>
+            </td>
+            <td class="comment_comment">
+              <div class="font_black"><%= @users.find(comment.user_id).name %></div>
+              <div><%= comment.content %></div>
+            </td>
           </tr>
         </table>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
+
 
   <div>
     <ul>
       <li><%= link_to "一覧に戻る", :dramas %></li>
-      <li><%= link_to "一覧に戻る", comment_path(@drama, drama_id: @drama.id) %></li>
+      <li><%= link_to "レビューを投稿", comment_path(@drama) %></li>
     </ul>
   </div>
 </section>

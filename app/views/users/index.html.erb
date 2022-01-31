@@ -1,28 +1,41 @@
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <div class="layout_back">
     <div class="layout_position">
-      <div class="layout_item_back white_color font_purple login_wide">
+      <div class="layout_item_back white_color font_purple favorite_wide">
         <h2 class="text_center">マイページ</h2>
-          <div class="d_row">
-            <div class="user_left">
-              <% if @user.image.attached? %>
-                <%= image_tag @user.image, class: "user_icon" %>
-              <% else %>
-                <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
-              <% end %>
-            </div>
-            <div class="user_right">
-              <h4 class="font_black"><%= @user.name %></h4>
-              <div class="profile_wide">
-                <%= @user.profile %>
-              </div>
+        <div class="d_row">
+          <div class="user_left favorite_margin">
+            <% if @user.image.attached? %>
+              <%= image_tag @user.image, class: "favorite_icon" %>
+            <% else %>
+              <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
+            <% end %>
+          </div>
+          <div class="favorite_margin">
+            <h4 class="font_black"><%= @user.name %></h4>
+            <div class="profile_wide">
+              <%= @user.profile %>
             </div>
           </div>
-          <%= link_to "プロフィール編集", edit_user_path(@user) %>
-          <%= link_to "コメント一覧", comments_path %>
+        </div>
+        <%= link_to "プロフィール編集", edit_user_path(@user) %>
+        <%= link_to "コメント一覧", comments_path %>
+        <div class="favorite_list">
+          <% @favorites.each do |favorite| %>
+            <div>
+                <% if favorite.drama.image.attached? %>
+                  <%= link_to (image_tag favorite.drama.image, class: "favorite_img"), drama_path(favorite.drama) %>
+                <% end %>
+                <div class="favorite_name_size"><%= favorite.drama.name %></div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="layout_wide dark_color">
+
   </div>
 
 
