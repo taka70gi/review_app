@@ -21,6 +21,9 @@
   width: 900px;
   margin: 0 50px;
 }
+.profile_wide{
+  margin: 20px 0;
+}
 .favorite_img
 {
   width: 100px;
@@ -45,8 +48,47 @@
   flex-wrap: wrap;
   border-top: #6353b3 solid;
   padding-top: 20px;
-  margin: 0 50px;
+  margin: 50px;
 }
 .favorite_margin{
   margin: 0 45px;
+}
+.favorite_list_row {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-top: #6353b3 solid;
+  padding: 20px 20px 20px;
+  margin: 30px 50px;
+}
+.user_comment{
+  width: 65%;
+}
+.navi_row{
+  display: inline;
+}
+.user-nav-pc .active {
+  border-right: 3px solid #4a90e2;
+}
+.user-nav-mobile .active {
+  border-bottom: 3px solid #4a90e2;
+}
+.navi_position{
+  display: flex;
+}
+.navi_btn{
+  padding: 10px;
+  font-weight: bold;
+  border: solid 1px #6353b3;
+  cursor: pointer;
+  margin: 0 30px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+.navi_btn:hover {
+  background: #efefef;
+}
+.navi_margin
+{
+  margin-top: -100px;
 }

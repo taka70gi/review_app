@@ -79,6 +79,10 @@
   color: #f75b69;
   text-decoration: none;
 }
+.comment_btn{
+  color: #729ceb;
+  text-decoration: none;
+}
 .heart_red {
   display: inline-block;
   color: #333;/*線の色*/
@@ -156,4 +160,7 @@
   border-right: solid 1px currentColor;
   border-bottom: solid 1px currentColor;
   background: #eb97ff;/*背景色*/
+}
+.link_margin{
+  margin-right: 25px;
 }
