@@ -1,0 +1,20 @@
+document.addEventListener("turbolinks:load", function() {
+  $(function(){
+      $(".favorite_navi").on('click',function(){
+          /*クリックでコンテンツを開閉*/
+          $(".favorite_list_position").slideToggle(200);
+      })
+  })
+  $(function(){
+    $(".comment_navi").on('click',function(){
+        /*クリックでコンテンツを開閉*/
+        $(".favorite_list_row").slideToggle(200);
+    })
+  })
+  $(function(){
+    $(".hamburger_wide").on('click',function(){
+        /*クリックでコンテンツを開閉*/
+        $(".header-nav-menu").slideToggle(200);
+    })
+  })
+});
