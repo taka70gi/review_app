@@ -15,16 +15,21 @@
           <div><%= @drama.summary %></div>
           <h5 class="summary_head">出演者</h5>
           <div><%= @drama.cast %></div>
-          <div class="">
+          <div class="list">
             <% if @drama.favorited_by(current_user) %>
               <%= link_to drama_favorites_path(@drama), method: :delete, class: "favorited_btn" do %>
-                <h4><span class="heart_red"></span> お気に入り登録済</h4>
+                <h4 class="link_margin"><span class="heart_red"></span> お気に入り登録済</h4>
               <% end %>
             <% else %>
                 <%= link_to drama_favorites_path(@drama), method: :drama, class: "no_favorited_btn" do %>
-                  <h4><span class="heart_white"></span> お気に入り登録</h4>
+                  <h4 class="link_margin"><span class="heart_white"></span> お気に入り登録</h4>
                 <% end %>
             <% end %>
+            <div>
+              <%= link_to comment_path(@drama), class: "comment_btn" do %>
+                <h4>レビューを投稿</h4>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
@@ -57,7 +62,6 @@
   <div>
     <ul>
       <li><%= link_to "一覧に戻る", :dramas %></li>
-      <li><%= link_to "レビューを投稿", comment_path(@drama) %></li>
     </ul>
   </div>
 </section>
