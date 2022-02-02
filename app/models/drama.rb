@@ -6,4 +6,7 @@ class Drama < ApplicationRecord
   def favorited_by(user)
     favorites.where(user_id: user).exists?
   end
+  def self.search(keyword)
+    where(["name LIKE? OR summary LIKE?", "%#{keyword}%", "%#{keyword}%"])
+  end
 end

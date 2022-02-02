@@ -43,6 +43,15 @@ class DramasController < ApplicationController
     flash[:notice] = "ユーザーを削除しました"
     redirect_to :dramas
   end
+
+  def search
+    if params[:keyword].present?
+      @dramas = Drama.search(params[:keyword])
+      @key = params[:keyword]
+    else
+      @dramas = Drama.all
+    end
+  end
 end
 
 private
