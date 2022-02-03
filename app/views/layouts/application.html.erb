@@ -8,13 +8,16 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
       <div class="header_layout">
         <div class="header_list">
           <div class="header_left">
-            <div class="header_title"><%= link_to "テスト" , dramas_path %></div>
+            <div class="header_title">
+              <%= link_to dramas_path do %>
+                <span class="page_title_m">韓ドラ</span><span class="page_title_s">レビュー</span>
+              <% end %>
+            </div>
             <div class="header_search_field">
               <%= form_with url: "/dramas/search", method: :get, local: true do |f| %>
                 <%= f.text_field :keyword, value: @keyword, :placeholder => "キーワード", class: "field_size" %><br>
@@ -40,7 +43,7 @@
             </div>
           <% else %>
             <lu class="header_right">
-              <li class="">
+              <li>
                 <%= link_to "ログイン", new_user_session_path, class: "" %>
               </li>
               <li>
@@ -51,7 +54,9 @@
         </div>
       </div>
     </header>
-    <%= yield %>
+    <div class="layout_back">
+      <%= yield %>
+    </div>
     <footer>
     </footer>
   </body>
