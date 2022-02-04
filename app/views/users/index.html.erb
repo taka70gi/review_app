@@ -1,3 +1,4 @@
+<%= render "shared/flash" %>
 <div class="layout_position">
   <div class="layout_item_back white_color font_purple favorite_wide">
     <h2 class="text_center">マイページ</h2>
@@ -25,7 +26,7 @@
   <div class="layout_item_back white_color font_purple favorite_wide">
     <div class="navi_position">
       <div class="favorite_navi navi_btn">お気に入り一覧</div>
-      <div class="comment_navi navi_btn">コメント一覧</div>
+      <div class="comment_navi navi_btn">投稿レビュー一覧</div>
     </div>
     <div class="favorite_list_position d_none">
       <div class="favorite_list">
@@ -45,7 +46,7 @@
     </div>
     <div class="favorite_list_row d_none">
       <% if @comments.count.zero? %>
-        投稿したコメントがありません
+        投稿したレビューがありません
       <% else %>
         <% @comments.each do |comment| %>
           <div class="d_row">
@@ -58,6 +59,7 @@
               <div class="font_black"><%= comment.drama.name %></div>
               <div><%= comment.content %></div>
             </div>
+            <div><%= link_to "更新", edit_comment_path(comment) %></div>
             <div><%= link_to "削除", comment, method: :delete, data: { confirm: "本当に削除しますか？" } %></div>
           </div>
         <% end %>

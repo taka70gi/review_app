@@ -1,3 +1,4 @@
+<%= render "shared/flash" %>
 <div class="layout_position">
   <div class="layout_item_back dark_color dark_color_position">
     <div class="container">
@@ -23,7 +24,7 @@
             <% end %>
           <% end %>
           <div>
-            <%= link_to comment_path(@drama), class: "comment_btn" do %>
+            <%= link_to new_comment_path(id: @drama.id), class: "comment_btn" do %>
               <h4>レビューを投稿</h4>
             <% end %>
           </div>

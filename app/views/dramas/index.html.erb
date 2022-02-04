@@ -1,8 +1,6 @@
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-<div class="layout_back">
-  <div class="layout_wide dark_color">
+<%= render "shared/flash" %>
+<div class="dark_color">
+  <div class="layout_wide">
     <div class="list">
       <% @dramas.each do |drama| %>
         <div class="recommend_img img_50 img_30 img_20 img_10">
@@ -15,22 +13,16 @@
     </div>
   </div>
 </div>
-
 <table>
   <thead>
     <tr>
-      <th>参照</th>
       <th>編集</th>
       <th>削除</th>
     </tr>
   </thead>
-
   <tbody>
     <% @dramas.each do |drama| %>
       <tr>
-        <td>
-          <%= link_to "参照", drama %>
-        </td>
         <td>
           <%= link_to "編集", [:edit, drama] %>
         </td>

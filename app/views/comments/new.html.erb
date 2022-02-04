@@ -1,19 +1,21 @@
+<%= render "shared/flash" %>
+<%= render "shared/error", obj: @comment %>
 <div class="layout_position">
   <div class="layout_item_back dark_color dark_color_position">
     <div class="container">
       <div class="drama_left">
-        <% if @comment.drama.image.attached? %>
-          <%= image_tag @comment.drama.image, class: "drama_img" %>
+        <% if @drama.image.attached? %>
+          <%= image_tag @drama.image, class: "drama_img" %>
         <% end %>
       </div>
       <div class="drama_right font_white">
-        <h2 class="color_gold"><%= @comment.drama.name %></h2>
+        <h2 class="color_gold"><%= @drama.name %></h2>
         <%= form_with model: @comment do |f| %>
           <div>
             <%= f.text_area :content, class: "area_size" %>
           </div>
           <%= f.hidden_field :user_id, value: @user.id %>
-          <%= f.hidden_field :drama_id, value: @comment.drama.id %>
+          <%= f.hidden_field :drama_id, value: @drama.id %>
           <div class="text_center padding_position">
             <%= f.submit "レビューを投稿", class: "btn btn_color_purple" %>
           </div>
@@ -23,6 +25,6 @@
   </div>
 </div>
 <div class="return_link_position">
-  <div class="return_link"><%= link_to "戻る", drama_path(@comment.drama), class: "font_white" %></div>
+  <div class="return_link"><%= link_to "戻る", drama_path(@drama), class: "font_white" %></div>
   <div><%= link_to "一覧に戻る", :dramas, class: "font_white" %></div>
 </div>

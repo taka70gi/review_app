@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
   def new
     @user = current_user
     @comment = Comment.new
+    @drama = Drama.find(params[:id])
   end
 
   def create
@@ -17,7 +18,7 @@ class CommentsController < ApplicationController
       redirect_to drama_path(@comment.drama)
     else
       flash.now[:alert] = "投稿できませんでした"
-      render drama_path(@comment)
+      render "new"
     end
   end
 
@@ -32,20 +33,21 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @user = current_user
     @comment = Comment.find(params[:id])
     if @comment.update(comments_params)
-      flash[:notice] = "コメントを更新しました"
+      flash[:notice] = "レビューを更新しました"
       redirect_to users_path
     else
-      flash[:alert] = "コメントを更新できませんでした"
-      render users_path
+      flash[:alert] = "レビューを更新できませんでした"
+      render "edit"
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    flash[:notice] = "コメントを削除しました"
+    flash[:notice] = "レビューを削除しました"
     redirect_to :users
   end
 end

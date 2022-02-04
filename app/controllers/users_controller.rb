@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def index
     @user = current_user
     @favorites = Favorite.where(user_id: current_user.id)
+    @comments = @user.comments
   end
 
   def new
@@ -22,10 +23,11 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    binding.pry
     if @user.update(params.require(:user).permit(:name, :profile, :image))
+      flash[:notice] = "プロフィールを更新しました"
       redirect_to :users
     else
+      flash.now[:alert] = "プロフィールを更新できませんでした"
       render "edit"
     end
   end

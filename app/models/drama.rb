@@ -9,4 +9,9 @@ class Drama < ApplicationRecord
   def self.search(keyword)
     where(["name LIKE? OR summary LIKE?", "%#{keyword}%", "%#{keyword}%"])
   end
+  validates :name, presence:true, uniqueness: true
+  validates :summary, presence:true
+  validates :cast, presence:true
+  validates :release_day, presence: true, numericality: true, length: {is:4}
+  validates :image, presence:true
 end
