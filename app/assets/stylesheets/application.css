@@ -173,7 +173,6 @@ li{
 .d_none{
   display: none;
 }
-
 .header_layout
 {
   width: 100%;
@@ -252,9 +251,14 @@ li{
   color: #9b04f7;
   font-weight: bold;
   text-shadow: 1px 0 5px #ffffff;
+  cursor: pointer;
 }
 .page_title_s{
   color: #4b0476;
   font-weight: bold;
   text-shadow: 1px 0 5px #ffffff;
+  cursor: pointer;
+}
+.border_none{
+  border: none;
 }

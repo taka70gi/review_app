@@ -1,67 +1,60 @@
-<section class="mainContent">
-<div class="layout_back">
-  <div class="layout_position">
-    <div class="layout_item_back dark_color dark_color_position">
-      <div class="container">
-
-        <div class="drama_left">
-          <% if @drama.image.attached? %>
-            <%= image_tag @drama.image, class: "drama_img" %>
-          <% end %>
-        </div>
-        <div class="drama_right font_white">
-          <h2 class="color_gold"><%= @drama.name %>(<%= @drama.release_day %>)</h2>
-          <h5 class="summary_head">あらすじ</h5>
-          <div><%= @drama.summary %></div>
-          <h5 class="summary_head">出演者</h5>
-          <div><%= @drama.cast %></div>
-          <div class="list">
-            <% if @drama.favorited_by(current_user) %>
-              <%= link_to drama_favorites_path(@drama), method: :delete, class: "favorited_btn" do %>
-                <h4 class="link_margin"><span class="heart_red"></span> お気に入り登録済</h4>
-              <% end %>
-            <% else %>
-                <%= link_to drama_favorites_path(@drama), method: :drama, class: "no_favorited_btn" do %>
-                  <h4 class="link_margin"><span class="heart_white"></span> お気に入り登録</h4>
-                <% end %>
+<div class="layout_position">
+  <div class="layout_item_back dark_color dark_color_position">
+    <div class="container">
+      <div class="drama_left">
+        <% if @drama.image.attached? %>
+          <%= image_tag @drama.image, class: "drama_img" %>
+        <% end %>
+      </div>
+      <div class="drama_right font_white">
+        <h2 class="color_gold"><%= @drama.name %>(<%= @drama.release_day %>)</h2>
+        <h5 class="summary_head">あらすじ</h5>
+        <div><%= @drama.summary %></div>
+        <h5 class="summary_head">出演者</h5>
+        <div><%= @drama.cast %></div>
+        <div class="list">
+          <% if @drama.favorited_by(current_user) %>
+            <%= link_to drama_favorites_path(@drama), method: :delete, class: "favorited_btn" do %>
+              <h4 class="link_margin"><span class="heart_red"></span> お気に入り登録済</h4>
             <% end %>
-            <div>
-              <%= link_to comment_path(@drama), class: "comment_btn" do %>
-                <h4>レビューを投稿</h4>
-              <% end %>
-            </div>
+          <% else %>
+            <%= link_to drama_favorites_path(@drama), method: :drama, class: "no_favorited_btn" do %>
+              <h4 class="link_margin"><span class="heart_white"></span> お気に入り登録</h4>
+            <% end %>
+          <% end %>
+          <div>
+            <%= link_to comment_path(@drama), class: "comment_btn" do %>
+              <h4>レビューを投稿</h4>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+<% if @drama.comments.count != 0 %>
   <div class="layout_position">
     <div class="layout_item_back white_color dark_color_position">
-      <% @drama.comments.each do |comment| %>
-        <table class="font_purple">
-          <tr>
-            <td class="comment_name td_height">
-              <% if @users.find(comment.user_id).image.attached? %>
-                <%= image_tag @users.find(comment.user_id).image, class: "user_icon" %>
-              <% else %>
-                <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
-              <% end %>
-            </td>
-            <td class="comment_comment">
-              <div class="font_black"><%= @users.find(comment.user_id).name %></div>
-              <div><%= comment.content %></div>
-            </td>
-          </tr>
-        </table>
-      <% end %>
+        <% @drama.comments.each do |comment| %>
+          <table class="font_purple">
+            <tr>
+              <td class="comment_name d_height">
+                <% if @users.find(comment.user_id).image.attached? %>
+                  <%= image_tag @users.find(comment.user_id).image, class: "user_icon" %>
+                <% else %>
+                  <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
+                <% end %>
+              </td>
+              <td class="comment_comment">
+                <div class="font_black"><%= @users.find(comment.user_id).name %></div>
+                <div><%= comment.content %></div>
+              </td>
+            </tr>
+          </table>
+        <% end %>
     </div>
   </div>
+<% end %>
+<div class="return_link_position">
+  <div><%= link_to "一覧に戻る", :dramas, class: "font_white" %></div>
 </div>
-
-
-  <div>
-    <ul>
-      <li><%= link_to "一覧に戻る", :dramas %></li>
-    </ul>
-  </div>
-</section>

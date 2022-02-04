@@ -1,71 +1,67 @@
-<% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
-  <div class="layout_back">
-    <div class="layout_position">
-      <div class="layout_item_back white_color font_purple favorite_wide">
-        <h2 class="text_center">マイページ</h2>
-        <div class="d_row">
-          <div class="user_left favorite_margin">
-            <% if @user.image.attached? %>
-              <%= image_tag @user.image, class: "favorite_icon" %>
-            <% else %>
-              <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
-            <% end %>
-          </div>
-          <div class="favorite_margin">
-            <h4 class="font_black"><%= @user.name %></h4>
-            <div class="profile_wide">
-              <%= @user.profile %>
-            </div>
-          </div>
-        </div>
-        <div class="text_center padding_position">
-          <%= link_to "編集", edit_user_path(@user), class: "btn btn_color_purple" %>
+<div class="layout_position">
+  <div class="layout_item_back white_color font_purple favorite_wide">
+    <h2 class="text_center">マイページ</h2>
+    <div class="d_row">
+      <div class="user_left favorite_margin">
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image, class: "favorite_icon" %>
+        <% else %>
+          <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
+        <% end %>
+      </div>
+      <div class="favorite_margin">
+        <h4 class="font_black"><%= @user.name %></h4>
+        <div class="profile_wide">
+          <%= @user.profile %>
         </div>
       </div>
     </div>
-    <div class="layout_position navi_margin">
-      <div class="layout_item_back white_color font_purple favorite_wide">
-        <div class="navi_position">
-          <div class="favorite_navi navi_btn">お気に入り一覧</div>
-          <div class="comment_navi navi_btn">コメント一覧</div>
-        </div>
-        <div class="favorite_list_position d_none">
-          <div class="favorite_list">
-            <% @favorites.each do |favorite| %>
-              <div>
-                  <% if favorite.drama.image.attached? %>
-                    <%= link_to (image_tag favorite.drama.image, class: "favorite_img"), drama_path(favorite.drama) %>
-                  <% end %>
-                  <div class="favorite_name_size"><%= favorite.drama.name %></div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <div class="favorite_list_row d_none">
-          <% @comments.each do |comment| %>
-            <div class="d_row">
-              <div>
-                <% if comment.drama.image.attached? %>
-                  <%= image_tag comment.drama.image, class: "comment_icon" %>
-                <% end %>
-              </div>
-              <div class="user_comment">
-                <div class="font_black"><%= comment.drama.name %></div>
-                <div><%= comment.content %></div>
-              </div>
-              <div><%= link_to "削除", comment, method: :delete, data: { confirm: "本当に削除しますか？" } %></div>
-            </div>
-          <% end %>
-        </div>
-      </div>
+    <div class="text_center padding_position">
+      <%= link_to "編集", edit_user_path(@user), class: "btn btn_color_purple" %>
     </div>
   </div>
-  <!-- ユーザーがログインしていた時の処理 -->
-  <h4> メールアドレス： <%= current_user.email %> </h4>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
-<% else %>
-  <!-- ユーザーがログインしていなかった時の処理 -->
-  <h2> 現在ログインしていません </h2>
-  <%= link_to "ログイン", new_user_session_path, class: 'post' %> <!-- ログイン画面に移行する -->
-  <%= link_to "新規登録", new_user_registration_path, class: 'post' %> <!-- 新規登録画面に移行する -->
-<% end %>
+</div>
+<div class="layout_position navi_margin">
+  <div class="layout_item_back white_color font_purple favorite_wide">
+    <div class="navi_position">
+      <div class="favorite_navi navi_btn">お気に入り一覧</div>
+      <div class="comment_navi navi_btn">コメント一覧</div>
+    </div>
+    <div class="favorite_list_position d_none">
+      <div class="favorite_list">
+        <% if @favorites.count.zero? %>
+          登録している作品がありません
+        <% else %>
+          <% @favorites.each do |favorite| %>
+            <div>
+              <% if favorite.drama.image.attached? %>
+                <%= link_to (image_tag favorite.drama.image, class: "favorite_img"), drama_path(favorite.drama) %>
+              <% end %>
+              <div class="favorite_name_size"><%= favorite.drama.name %></div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="favorite_list_row d_none">
+      <% if @comments.count.zero? %>
+        投稿したコメントがありません
+      <% else %>
+        <% @comments.each do |comment| %>
+          <div class="d_row">
+            <div>
+              <% if comment.drama.image.attached? %>
+                <%= image_tag comment.drama.image, class: "comment_icon" %>
+              <% end %>
+            </div>
+            <div class="user_comment">
+              <div class="font_black"><%= comment.drama.name %></div>
+              <div><%= comment.content %></div>
+            </div>
+            <div><%= link_to "削除", comment, method: :delete, data: { confirm: "本当に削除しますか？" } %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,3 @@
-<div class="layout_back">
 <div class="layout_position">
   <div class="layout_item_back dark_color dark_color_position">
     <div class="container">
@@ -19,11 +18,11 @@
             <%= f.submit "レビューを投稿", class: "btn btn_color_purple" %>
           </div>
         <% end %>
-        <%= link_to "戻る", drama_path(@drama) %>
-        <%= link_to "一覧に戻る", :dramas %>
       </div>
     </div>
   </div>
 </div>
-
+<div class="return_link_position">
+  <div class="return_link"><%= link_to "戻る", drama_path(@drama), class: "font_white" %></div>
+  <div><%= link_to "一覧に戻る", :dramas, class: "font_white" %></div>
 </div>

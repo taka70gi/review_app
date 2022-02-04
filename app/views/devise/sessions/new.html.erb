@@ -1,35 +1,33 @@
-<div class="layout_back">
-  <div class="layout_position">
-    <div class="layout_item_back white_color font_purple login_wide">
-      <h2 class="text_center">ログイン</h2>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="outer">
-          <div class="inner">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field_size" %>
-          </div>
+<div class="layout_position">
+  <div class="layout_item_back white_color font_purple login_wide">
+    <h2 class="text_center">ログイン</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="outer">
+        <div class="inner">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field_size" %>
         </div>
-        <div class="outer">
-          <div class="inner">
-            <%= f.label :password %><br />
-            <%= f.password_field :password, autocomplete: "current-password", class: "field_size" %>
-          </div>
-        </div>
-        <div class="outer">
-          <div class="check_box_position">
-            <% if devise_mapping.rememberable? %>
-                <%= f.check_box :remember_me %>
-                <%= f.label :remember_me %>
-            <% end %>
-          </div>
-        </div>
-        <div class="padding_position text_center">
-          <%= f.submit "ログイン", class: "btn btn_color" %>
-        </div>
-      <% end %>
-      <div class="text_center padding_position">
-        <%= render "devise/shared/links" %>
       </div>
+      <div class="outer">
+        <div class="inner">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "field_size" %>
+        </div>
+      </div>
+      <div class="outer">
+        <div class="check_box_position">
+          <% if devise_mapping.rememberable? %>
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+          <% end %>
+        </div>
+      </div>
+      <div class="padding_position text_center">
+        <%= f.submit "ログイン", class: "btn btn_color" %>
+      </div>
+    <% end %>
+    <div class="text_center padding_position">
+      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>
