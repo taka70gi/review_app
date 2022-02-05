@@ -24,9 +24,15 @@
           <span class="hamburger_line"></span>
         </div>
         <ul class="header-nav-menu">
-          <li><%= link_to "マイページ", users_path, class: "string_layout_black" %></li>
-          <li><%= link_to "アカウント編集", edit_user_path(load_user), class: "string_layout_black" %></li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "string_layout_black" %></li>
+          <% if load_user.admin? %>
+            <li><%= link_to "ドラマ管理ページ", admin_dramas_path, class: "string_layout_black" %></li>
+            <li><%= link_to "ドラマ新規登録", new_admin_drama_path, class: "string_layout_black" %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "string_layout_black" %></li>
+          <% else %>
+            <li><%= link_to "マイページ", users_path, class: "string_layout_black" %></li>
+            <li><%= link_to "アカウント編集", edit_user_path(load_user), class: "string_layout_black" %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "string_layout_black" %></li>
+          <% end %>
         </ul>
       </div>
     <% else %>

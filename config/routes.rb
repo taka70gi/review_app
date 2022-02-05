@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'dramas#index'
   get 'favorites/index'
   get 'users/index'
   get 'dramas/index'
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users
-  resources :dramas
+  #resources :dramas
   resources :comments
 
   resources :users, only: [:show, :edit, :update] do
@@ -16,5 +17,8 @@ Rails.application.routes.draw do
   end
   resources :dramas, expect: [:index] do
     resource :favorites, only: [:create, :destroy]
+  end
+  namespace :admin do
+    resources :dramas, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   end
 end

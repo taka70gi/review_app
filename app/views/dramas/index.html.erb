@@ -13,23 +13,3 @@
     </div>
   </div>
 </div>
-<table>
-  <thead>
-    <tr>
-      <th>編集</th>
-      <th>削除</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @dramas.each do |drama| %>
-      <tr>
-        <td>
-          <%= link_to "編集", [:edit, drama] %>
-        </td>
-        <td>
-          <%= link_to "削除", drama, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
