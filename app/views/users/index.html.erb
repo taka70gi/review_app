@@ -1,3 +1,4 @@
+<% provide(:title, "マイページ") %>
 <%= render "shared/flash" %>
 <div class="layout_position">
   <div class="layout_item_back white_color font_purple favorite_wide">
@@ -52,7 +53,7 @@
           <div class="d_row">
             <div>
               <% if comment.drama.image.attached? %>
-                <%= image_tag comment.drama.image, class: "comment_icon" %>
+                <%= image_tag comment.drama.image, class: "drama_img_small" %>
               <% end %>
             </div>
             <div class="user_comment">
