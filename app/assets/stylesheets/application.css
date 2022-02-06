@@ -54,6 +54,11 @@ li{
   border: 2px solid #ffff00;
   margin-left: 10px;
 }
+.drama_img_small
+{
+  width: 50px;
+  height: 64px;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -86,6 +91,9 @@ li{
 }
 .font_black{
   color: #000000;
+}
+.font_pink{
+  color: #9149AA;
 }
 .text_center{
   text-align: center;
@@ -261,4 +269,23 @@ li{
 }
 .border_none{
   border: none;
+}
+#error_explanation{
+  text-align: center;
+  font-size: 13px;
+  color: #d1423b;
+}
+.notice {
+  margin: 0;
+  text-align: center;
+  color: white;
+  font-size: 13px;
+  background-color: #9c27b0;
+}
+.alert{
+  margin: 0;
+  text-align: center;
+  color: white;
+  font-size: 13px;
+  background-color: #d1423b;
 }
