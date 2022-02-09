@@ -4,7 +4,7 @@
   <div class="layout_wide">
     <div class="list">
       <% @dramas.each do |drama| %>
-        <div class="recommend_img img_50 img_30 img_20 img_10">
+        <div class="drama_list recommend_img img_50 img_30 img_20 img_10">
             <% if drama.image.attached? %>
               <%= link_to (image_tag drama.image, class: "drama_img"), drama %>
             <% end %>

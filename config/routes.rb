@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'adminhomes/index'
   root 'dramas#index'
   get 'favorites/index'
   get 'users/index'
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   resources :users
   resources :dramas
   resources :comments
+  resources :adminhomes, only: [:index]
 
   resources :users, only: [:show, :edit, :update] do
     get :favorites, on: :collection

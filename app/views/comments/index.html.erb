@@ -1,28 +1,37 @@
-<div class="layout_back">
-  <div class="layout_position">
-    <div class="layout_item_back white_color dark_color_position">
-      <table class="font_purple">
-        <h2 class="text_center">コメント一覧</h2>
-        <% @comments.each do |comment| %>
-        <tr>
-          <td class="comment_name td_height">
-            <% if comment.drama.image.attached? %>
-              <%= image_tag comment.drama.image, class: "comment_icon" %>
+<% provide(:title, "管理者ページ") %>
+<%= render "shared/flash" %>
+<div class="layout_position">
+  <div class="layout_item_back dark_color font_white">
+    <div class="admin_position">
+      <h2 class="text_center font_pink">レビュー管理ページ</h2>
+      <% if @comments.count != 0 %>
+        <div class="layout_item_back white_color dark_color_position">
+          <table class="font_purple admin_index">
+            <% @comments.each do |comment| %>
+              <tr>
+                <td>
+                  <div>
+                    <% if comment.drama.image.attached? %>
+                      <%= link_to (image_tag comment.drama.image, class: "drama_img_small"), comment.drama %>
+                    <% end %>
+                  </div>
+                  <div class="font_small"><%= comment.drama.name %></div>
+                </td>
+                <td class="drama_name_wide">
+                  <div><%= comment.user.name %></div>
+                  <div><%= comment.content %></div>
+                </td>
+                <td  class="link_wide">
+                  <%= link_to "削除", comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                </td>
+              </tr>
             <% end %>
-          </td>
-          <td class="comment_wide">
-            <div class="font_black"><%= comment.drama.name %></div>
-            <div><%= comment.content %></div>
-          </td>
-          <td class="coment_del_wide">
-            <div>
-              <%= link_to "削除", comment, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-            </div>
-          </td>
-        </tr>
-        <% end %>
-      </table>
-      <%= link_to "戻る", users_path %>
+          </table>
+        </div>
+      <% end %>
     </div>
   </div>
+</div>
+<div class="return_link_position">
+  <div class="return_link"><%= link_to "管理者ページへ戻る", adminhomes_path, class: "font_white" %></div>
 </div>

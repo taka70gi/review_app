@@ -1,0 +1,21 @@
+<% provide(:title, "管理者ページ") %>
+<%= render "shared/flash" %>
+<div class="layout_position">
+  <div class="layout_item_back dark_color font_white">
+    <div class="admin_position">
+      <h2 class="text_center font_white">管理者ページ</h2>
+      <div class="adminhome_btn_position">
+        <div>
+          <%= link_to admin_dramas_path, class: "btn btn_color_purple adminhome_btn" do %>
+            <div class="btn_padding">ドラマ管理</div>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to comments_path, class: "btn btn_color_purple adminhome_btn" do %>
+            <div class="btn_padding">コメント管理</div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

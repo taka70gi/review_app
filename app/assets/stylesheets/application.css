@@ -95,6 +95,9 @@ li{
 .font_pink{
   color: #9149AA;
 }
+.font_small{
+  font-size: 13px;
+}
 .text_center{
   text-align: center;
 }

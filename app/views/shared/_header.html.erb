@@ -25,8 +25,10 @@
         </div>
         <ul class="header-nav-menu">
           <% if load_user.admin? %>
+            <li><%= link_to "管理者ページ", adminhomes_path, class: "string_layout_black" %></li>
             <li><%= link_to "ドラマ管理ページ", admin_dramas_path, class: "string_layout_black" %></li>
             <li><%= link_to "ドラマ新規登録", new_admin_drama_path, class: "string_layout_black" %></li>
+            <li><%= link_to "レビュー管理ページ", comments_path, class: "string_layout_black" %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "string_layout_black" %></li>
           <% else %>
             <li><%= link_to "マイページ", users_path, class: "string_layout_black" %></li>

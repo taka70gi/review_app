@@ -9,28 +9,33 @@
           <div>新規登録</div>
         <% end %>
       </div>
-      <div class="layout_item_back white_color dark_color_position">
-      <% @dramas.each do |drama| %>
-        <table class="font_purple admin_index">
-          <tr>
-            <td>
-              <% if drama.image.attached? %>
-                <%= link_to (image_tag drama.image, class: "drama_img_small"), drama %>
-              <% end %>
-            </td>
-            <td class="drama_name_wide">
-              <div><%= drama.name %></div>
-            </td>
-            <td class="link_wide">
-              <%= link_to "編集", edit_admin_drama_path(drama) %>
-            </td>
-            <td  class="link_wide">
-              <%= link_to "削除", admin_drama_path(drama), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-            </td>
-          </tr>
-        </table>
+      <% if @dramas.count != 0 %>
+        <div class="layout_item_back white_color dark_color_position">
+          <table class="font_purple admin_index">
+            <% @dramas.each do |drama| %>
+              <tr>
+                <td>
+                  <% if drama.image.attached? %>
+                    <%= link_to (image_tag drama.image, class: "drama_img_small"), drama %>
+                  <% end %>
+                </td>
+                <td class="drama_name_wide">
+                  <div><%= drama.name %></div>
+                </td>
+                <td class="link_wide">
+                  <%= link_to "編集", edit_admin_drama_path(drama) %>
+                </td>
+                <td  class="link_wide">
+                  <%= link_to "削除", admin_drama_path(drama), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
       <% end %>
-      </div>
     </div>
   </div>
+</div>
+<div class="return_link_position">
+  <div class="return_link"><%= link_to "管理者ページへ戻る", adminhomes_path, class: "font_white" %></div>
 </div>
