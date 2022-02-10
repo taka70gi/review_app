@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     if current_user.admin?
       adminhomes_path
     else
-      edit_user_path(current_user)
+      dramas_path
     end
   end
 end
