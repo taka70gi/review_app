@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "Adminhomes", type: :request do
+RSpec.describe "Homes", type: :request do
   describe "index" do
     let!(:admin) { create :user, :admin }
     let!(:drama) { create(:drama) }
 
     before do
       sign_in admin
-      get adminhomes_path
+      get homes_path
     end
 
     it 'レスポンスのステータスコードが200であるか' do

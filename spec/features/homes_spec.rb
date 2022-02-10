@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'adminhomes', type: :feature do
+feature 'homes', type: :feature do
   describe "index" do
     given!(:admin) { create :user, :admin }
     given!(:drama) { create(:drama) }
