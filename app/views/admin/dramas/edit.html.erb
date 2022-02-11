@@ -6,7 +6,7 @@
     <div class="admin_position">
       <h2 class="text_center font_pink">ドラマ更新</h2>
       <div class="container">
-        <%= form_with model: @drama, url: admin_dramas_path do |f| %>
+        <%= form_with model: @drama, url: admin_drama_path do |f| %>
           <table>
             <tr class="d_height">
               <th class="d_padding"><%= f.label :name ,"名前" %></th>
