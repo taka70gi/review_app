@@ -16,6 +16,6 @@ ja:
         summary: "あらすじ"
         cast: "出演者"
         image: "画像"
-        release_day: "公開日"
+        release_day: "公開年"
     models:
       drama: "ユーザ"
