@@ -39,6 +39,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem "factory_bot_rails"
   gem 'spring-commands-rspec'
+  gem 'capybara', '>= 3.26'
+  gem 'selenium-webdriver'
 end
 
 group :development do
