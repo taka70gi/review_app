@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Comments", type: :request do
   describe "index" do
     let!(:admin) { create :user, :admin }
-    let!(:drama) { create(:drama) }
+    let!(:comment) { create(:comment) }
 
     before do
       sign_in admin
@@ -14,8 +14,16 @@ RSpec.describe "Comments", type: :request do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディにドラマ情報が存在するか' do
-      expect(response.body).to include "レビュー管理ページ"
+    it 'レスポンスボディに登録ドラマのタイトルが存在するか' do
+      expect(response.body).to include comment.drama.name
+    end
+
+    it 'レスポンスボディにレビュー内容が存在するか' do
+      expect(response.body).to include comment.content
+    end
+
+    it 'レスポンスボディにレビューしたユーザー名が存在するか' do
+      expect(response.body).to include comment.user.name
     end
   end
 
@@ -32,14 +40,13 @@ RSpec.describe "Comments", type: :request do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディにドラマ情報が存在するか' do
+    it 'レスポンスボディに登録ドラマのタイトルが存在するか' do
       expect(response.body).to include drama.name
     end
   end
 
   describe "edit" do
     let!(:general) { create :user, :general }
-    let!(:drama) { create(:drama) }
     let!(:comment) { create(:comment) }
 
     before do
@@ -51,7 +58,11 @@ RSpec.describe "Comments", type: :request do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディにレビュー情報が存在するか' do
+    it 'レスポンスボディに登録ドラマのタイトルが存在するか' do
+      expect(response.body).to include comment.drama.name
+    end
+
+    it 'レスポンスボディにレビュー内容が存在するか' do
       expect(response.body).to include comment.content
     end
   end

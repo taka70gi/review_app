@@ -2,11 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Dramas", type: :request do
   describe "index" do
-    let!(:general) { create :user, :general }
     let!(:drama) { create(:drama) }
 
     before do
-      sign_in general
       get dramas_path
     end
 
@@ -14,12 +12,14 @@ RSpec.describe "Dramas", type: :request do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディにドラマ一覧情報が存在するか' do
+    it 'レスポンスボディに登録ドラマのタイトルが存在するか' do
       expect(response.body).to include drama.name
     end
   end
 
   describe "search" do
+    let!(:drama) { create(:drama) }
+
     before do
       get "/dramas/search"
     end
@@ -28,17 +28,15 @@ RSpec.describe "Dramas", type: :request do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディに管理者画面情報が存在するか' do
-      expect(response.body).to include "検索結果:"
+    it 'レスポンスボディに登録ドラマのタイトルが存在するか' do
+      expect(response.body).to include drama.name
     end
   end
 
   describe "show" do
-    let!(:general) { create :user, :general }
     let!(:drama) { create(:drama) }
 
     before do
-      sign_in general
       get drama_path(drama)
     end
 
@@ -46,11 +44,20 @@ RSpec.describe "Dramas", type: :request do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディに管理者画面情報が存在するか' do
+    it 'レスポンスボディに登録ドラマのタイトルが存在するか' do
       expect(response.body).to include drama.name
-      expect(response.body).to include drama.summary
+    end
+
+    it 'レスポンスボディに登録ドラマの出演者が存在するか' do
       expect(response.body).to include drama.cast
+    end
+
+    it 'レスポンスボディに登録ドラマの公開年が存在するか' do
       expect(response.body).to include drama.release_day.to_s
+    end
+
+    it 'レスポンスボディに登録ドラマのあらすじが存在するか' do
+      expect(response.body).to include drama.summary
     end
   end
 end

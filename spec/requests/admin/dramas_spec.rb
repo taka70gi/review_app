@@ -14,9 +14,8 @@ RSpec.describe "Admin::Dramas", type: :request do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディに管理者画面情報が存在するか' do
-      expect(response.body).to include "ドラマ管理ページ"
-      expect(response.body).to include drama.name
+    it 'レスポンスボディに登録ドラマのタイトルが存在するか' do
+        expect(response.body).to include drama.name
     end
   end
 
@@ -30,10 +29,6 @@ RSpec.describe "Admin::Dramas", type: :request do
 
     it 'レスポンスのステータスコードが200であるか' do
       expect(response.status).to eq 200
-    end
-
-    it 'レスポンスボディに管理者画面情報が存在するか' do
-      expect(response.body).to include "ドラマ新規登録"
     end
   end
 
@@ -50,9 +45,20 @@ RSpec.describe "Admin::Dramas", type: :request do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディに管理者画面情報が存在するか' do
-      expect(response.body).to include "ドラマ更新"
+    it 'レスポンスボディに登録ドラマのタイトルが存在するか' do
       expect(response.body).to include drama.name
+    end
+
+    it 'レスポンスボディに登録ドラマの出演者が存在するか' do
+      expect(response.body).to include drama.cast
+    end
+
+    it 'レスポンスボディに登録ドラマの公開年が存在するか' do
+      expect(response.body).to include drama.release_day.to_s
+    end
+
+    it 'レスポンスボディに登録ドラマのあらすじが存在するか' do
+      expect(response.body).to include drama.summary
     end
   end
 end
