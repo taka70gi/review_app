@@ -7,25 +7,23 @@ feature 'homes', type: :feature do
     given(:image) { create(:image) }
     before do
       sign_in admin
-      visit dramas_path
+      visit homes_path
     end
 
-    it 'ドラマタイトルが表示されること' do
-      binding.pry
-      within("div.drama_list") do
-        expect(page).to have_content(drama.name)
+    it 'ドラマ管理ページへのリンクが正しくされていること' do
+      within("div.admin_position") do
+        click_on "ドラマ管理"
+        expect(current_path).to eq admin_dramas_path
       end
+      expect(page).to have_content("ドラマ管理ページ")
     end
 
-    it 'ドラマ画像が表示されること' do
-      within("div.drama_list") do
-        expect(page).to have_selector("img,[src$='#{image.filename}']")
+    it 'レビュー管理ページへのリンクが正しくされていること' do
+      within("div.admin_position") do
+        click_on "レビュー管理"
+        expect(current_path).to eq comments_path
       end
-    end
-
-    it 'ドラマ詳細ページへのリンクが正しくされていること' do
-      within("div.drama_list") do
-      end
+      expect(page).to have_content("ドラマ管理ページ")
     end
   end
 end
