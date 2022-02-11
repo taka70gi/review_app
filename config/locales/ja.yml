@@ -1,11 +1,6 @@
 ja:
   activerecord:
     attributes:
-      comment:
-        content: "レビュー内容"
-    models:
-      comment: "コメント"
-    attributes:
       user:
         name: "名前"
     models:
@@ -19,3 +14,8 @@ ja:
         release_day: "公開年"
     models:
       drama: "ユーザ"
+    attributes:
+      comment:
+        content: "レビュー内容"
+    models:
+      comment: "レビュー"
