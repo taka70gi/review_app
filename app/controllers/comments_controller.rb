@@ -11,13 +11,14 @@ class CommentsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @comment = Comment.new(comments_params)
     if @comment.save
       flash[:notice] = "投稿しました"
       redirect_to drama_path(@comment.drama)
     else
-      flash.now[:alert] = "投稿できませんでした"
-      render "new"
+      flash[:alert] = "レビューを投稿できませんでした"
+      render "edit"
     end
   end
 
