@@ -24,8 +24,3 @@ class DramasController < ApplicationController
     end
   end
 end
-
-private
-def dramas_params
-  params.require(:drama).permit(:name, :release_day, :image, :summary, :cast)
-end
