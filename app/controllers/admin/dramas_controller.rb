@@ -5,9 +5,6 @@ class Admin::DramasController < ApplicationController
     @dramas = Drama.all
   end
 
-  def show
-  end
-
   def new
     @drama = Drama.new
   end
@@ -19,7 +16,7 @@ class Admin::DramasController < ApplicationController
       redirect_to admin_dramas_path
     else
       flash.now[:alert] = "ドラマを登録できませんでした"
-      render "edit"
+      render "new"
     end
   end
 
@@ -49,4 +46,9 @@ class Admin::DramasController < ApplicationController
   def if_not_admin
     redirect_to root_path unless current_user.admin?
   end
+end
+
+private
+def dramas_params
+  params.require(:drama).permit(:name, :release_day, :image, :summary, :cast)
 end
