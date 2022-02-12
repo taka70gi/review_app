@@ -12,9 +12,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @dramas = @user.dramas
-    favorites = Favorite.where(user_id: current_user.id).pluck(:drama_id)
   end
 
   def edit
@@ -23,7 +20,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update(params.require(:user).permit(:name, :profile, :image))
+    if @user.update(users_params)
       flash[:notice] = "プロフィールを更新しました"
       redirect_to :users
     else
@@ -34,4 +31,8 @@ class UsersController < ApplicationController
 
   def destroy
   end
+end
+private
+def users_params
+  params.require(:user).permit(:name, :profile, :image)
 end
