@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     @user = current_user
     @comment = Comment.new(comments_params)
     if @comment.save
-      flash[:notice] = "投稿しました"
+      flash[:notice] = "レビューを投稿しました"
       redirect_to drama_path(@comment.drama)
     else
       flash[:alert] = "レビューを投稿できませんでした"
