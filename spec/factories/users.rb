@@ -6,6 +6,9 @@ FactoryBot.define do
     password_confirmation{ "password" }
     profile{ "テストデータ" }
     admin{false}
+    after(:build) do |user|
+      user.image.attach(io: File.open(Rails.root.join("spec/fixtures/files/star_img.png")), filename: 'star_img.png')
+    end
 
     trait :admin do
       name{ "admin" }
