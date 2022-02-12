@@ -8,13 +8,6 @@ class DramasController < ApplicationController
     @users = User.all
   end
 
-  def destroy
-    @drama = Drama.find(params[:id])
-    @drama.destroy
-    flash[:notice] = "ドラマを削除しました"
-    redirect_to :dramas
-  end
-
   def search
     if params[:keyword].present?
       @dramas = Drama.search(params[:keyword])
