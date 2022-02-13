@@ -48,7 +48,12 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
     flash[:notice] = "レビューを削除しました"
-    redirect_to :users
+    if current_user.admin?
+      redirect_to comments_path
+    else
+      redirect_to :users
+    end
+
   end
 end
 
