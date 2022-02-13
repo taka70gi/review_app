@@ -6,7 +6,7 @@ feature 'users', type: :feature do
       given(:general) { create :user, :general }
 
       context 'フォームの入力値が正常' do
-        it 'ユーザーの新規作成が成功' do
+        it 'ユーザーの新規作成が成功すること' do
           visit new_user_registration_path
           fill_in 'user_name', with: "test0"
           fill_in 'user_email', with: "test0@example.com"
@@ -19,7 +19,7 @@ feature 'users', type: :feature do
       end
 
       context 'メールアドレス未記入' do
-        it 'ユーザーの新規作成が失敗' do
+        it 'ユーザーの新規作成が失敗すること' do
           visit new_user_registration_path
           fill_in 'user_name', with: "test0"
           fill_in 'user_password', with: "password"
@@ -31,7 +31,7 @@ feature 'users', type: :feature do
       end
 
       context '登録済メールアドレス' do
-        it 'ユーザーの新規作成が失敗' do
+        it 'ユーザーの新規作成が失敗すること' do
           visit new_user_registration_path
           fill_in 'user_name', with: "test0"
           fill_in 'user_email', with: general.email
@@ -45,7 +45,7 @@ feature 'users', type: :feature do
       end
 
       context '名前未記入' do
-        it 'ユーザーの新規作成が失敗' do
+        it 'ユーザーの新規作成が失敗すること' do
           visit new_user_registration_path
           fill_in 'user_email', with: "test0@example.com"
           fill_in 'user_password', with: "password"
@@ -62,7 +62,7 @@ feature 'users', type: :feature do
       given(:general) { create :user, :general }
 
       context 'フォームの入力値が正常' do
-        it 'ログインが成功' do
+        it 'ログインが成功すること' do
           visit new_user_session_path
           fill_in 'user_email', with: general.email
           fill_in 'user_password', with: general.password
@@ -73,7 +73,7 @@ feature 'users', type: :feature do
       end
 
       context 'メールアドレス間違い' do
-        it 'ログインが失敗' do
+        it 'ログインが失敗すること' do
           visit new_user_session_path
           fill_in 'user_email', with: "test0@example.com"
           fill_in 'user_password', with: general.password
@@ -84,7 +84,7 @@ feature 'users', type: :feature do
       end
 
       context 'パスワード間違い' do
-        it 'ログインが失敗' do
+        it 'ログインが失敗すること' do
           visit new_user_session_path
           fill_in 'user_email', with: general.email
           fill_in 'user_password', with: ""
@@ -99,7 +99,7 @@ feature 'users', type: :feature do
       given(:admin) { create :user, :admin }
 
       context 'フォームの入力値が正常' do
-        it '管理画面へ遷移' do
+        it '管理画面へ遷移すること' do
           visit new_user_session_path
           fill_in 'user_email', with: admin.email
           fill_in 'user_password', with: admin.password
@@ -158,7 +158,7 @@ feature 'users', type: :feature do
       end
 
       context 'フォームの入力値が正常' do
-        it 'プロフィール更新が成功' do
+        it 'プロフィール更新が成功すること' do
           fill_in 'user_name', with: "ぶた"
           fill_in 'user_profile', with: "ぶたです"
           attach_file "user_image", "spec/fixtures/files/pig_img.png"
@@ -173,7 +173,7 @@ feature 'users', type: :feature do
       end
 
       context '名前未記入' do
-        it 'プロフィール更新が失敗' do
+        it 'プロフィール更新が失敗すること' do
           fill_in 'user_name', with: ""
           fill_in 'user_profile', with: "ぶたです"
           attach_file "user_image", "spec/fixtures/files/pig_img.png"
