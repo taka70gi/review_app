@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'homes', type: :feature do
-  describe "index" do
+  describe "管理者ページ" do
     given(:admin) { create :user, :admin }
     given(:general) { create :user, :general }
     given(:drama) { create(:drama) }
