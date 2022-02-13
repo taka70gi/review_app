@@ -37,8 +37,8 @@
 <% if @drama.comments.count != 0 %>
   <div class="layout_position">
     <div class="layout_item_back white_color dark_color_position">
-        <% @drama.comments.each do |comment| %>
-          <table class="font_purple">
+        <table class="font_purple review_table">
+          <% @drama.comments.each do |comment| %>
             <tr>
               <td class="comment_name d_height">
                 <% if @users.find(comment.user_id).image.attached? %>
@@ -47,13 +47,13 @@
                   <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
                 <% end %>
               </td>
-              <td class="comment_comment">
+              <td class="drama_comment_wide">
                 <div class="font_black"><%= @users.find(comment.user_id).name %></div>
                 <div><%= comment.content %></div>
               </td>
             </tr>
-          </table>
-        <% end %>
+          <% end %>
+        </table>
     </div>
   </div>
 <% end %>
