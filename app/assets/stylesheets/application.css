@@ -153,6 +153,11 @@ li{
   background-color: #9149AA;
   border: none;
 }
+.search_btn{
+  padding: 0 8px;
+  font-size: 10px;
+  margin-left: 5px;
+}
 .padding_position{
   padding: 10px;
   line-height: 30px;
@@ -292,4 +297,7 @@ li{
   color: white;
   font-size: 13px;
   background-color: #d1423b;
+}
+.search_position{
+  display: flex;
 }

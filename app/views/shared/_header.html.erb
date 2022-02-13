@@ -8,8 +8,10 @@
       </div>
       <div class="header_search_field">
         <%= form_with url: "/dramas/search", method: :get, local: true do |f| %>
-          <%= f.text_field :keyword, value: @keyword, :placeholder => "検索", class: "field_size" %><br>
-          <% f.submit %>
+          <div class="search_position">
+            <%= f.text_field :keyword, value: @keyword, class: "field_size" %><br>
+            <%= f.submit "検索", class: "search_btn btn btn_color_purple" %>
+          </div>
         <% end %>
       </div>
     </div>
