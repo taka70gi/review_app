@@ -22,10 +22,10 @@
                 <td class="drama_name_wide">
                   <div><%= drama.name %></div>
                 </td>
-                <td class="link_wide">
+                <td class="link_wide link_edit">
                   <%= link_to "編集", edit_admin_drama_path(drama) %>
                 </td>
-                <td  class="link_wide">
+                <td  class="link_wide link_delete">
                   <%= link_to "削除", admin_drama_path(drama), method: :delete, data: { confirm: "本当に削除しますか？" } %>
                 </td>
               </tr>
