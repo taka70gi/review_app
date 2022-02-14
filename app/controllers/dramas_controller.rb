@@ -4,6 +4,7 @@ class DramasController < ApplicationController
   end
 
   def show
+    @user = current_user
     @drama = Drama.find(params[:id])
     @users = User.all
   end

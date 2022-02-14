@@ -1,0 +1,16 @@
+<div class="list">
+  <% if drama.favorited_by(current_user) %>
+    <%= link_to drama_favorites_path(drama), method: :delete, class: "favorited_btn" do %>
+      <h4 class="link_margin"><span class="heart_red"></span> お気に入り登録済</h4>
+    <% end %>
+  <% else %>
+    <%= link_to drama_favorites_path(drama), method: :drama, class: "no_favorited_btn" do %>
+      <h4 class="link_margin"><span class="heart_white"></span> お気に入り登録</h4>
+    <% end %>
+  <% end %>
+  <div>
+    <%= link_to new_comment_path(id: drama.id), class: "comment_btn" do %>
+      <h4>レビューを投稿</h4>
+    <% end %>
+  </div>
+</div>
