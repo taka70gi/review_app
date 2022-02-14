@@ -3,19 +3,15 @@ ja:
     attributes:
       user:
         name: "名前"
-    models:
-      user: "ユーザ"
-    attributes:
       drama:
         name: "タイトル"
         summary: "あらすじ"
         cast: "出演者"
         image: "画像"
         release_day: "公開年"
-    models:
-      drama: "ユーザ"
-    attributes:
       comment:
         content: "レビュー内容"
     models:
+      user: "ユーザ"
+      drama: "ドラマ"
       comment: "レビュー"
