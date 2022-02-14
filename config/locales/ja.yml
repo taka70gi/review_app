@@ -12,6 +12,6 @@ ja:
       comment:
         content: "レビュー内容"
     models:
-      user: "ユーザ"
+      user: "ユーザー"
       drama: "ドラマ"
       comment: "レビュー"
