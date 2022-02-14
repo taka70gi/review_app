@@ -113,73 +113,126 @@ feature 'users', type: :feature do
 
   describe 'ログイン後' do
     describe 'ユーザーマイページ' do
-      given(:general) { create :user, :general }
-      given(:drama) { create(:drama) }
-      given(:comment) { create(:comment) }
-      given(:favorite) { create(:favorite, user_id: general.id, drama_id: drama.id) }
-      before do
-        sign_in general
-        general.comments << comment
-        drama.comments << comment
-        visit users_path
-      end
-
-      it 'ユーザー編集ページへのリンクが正しくされていること' do
-        within("div.mypage_btn") do
-          click_on "編集"
-          expect(current_path).to eq edit_user_path(general)
+      describe 'ユーザー情報表示' do
+        given(:general) { create :user, :general }
+        given(:drama) { create(:drama) }
+        given(:comment) { create(:comment) }
+        given(:favorite) { create(:favorite, user_id: general.id, drama_id: drama.id) }
+        before do
+          sign_in general
+          general.comments << comment
+          drama.comments << comment
+          visit users_path
         end
-        expect(page).to have_content("プロフィール編集")
-        expect(page).to have_content(general.name)
-        expect(page).to have_content(general.profile)
+
+        it 'ユーザー編集ページへのリンクが正しくされていること' do
+          within("div.mypage_btn") do
+            click_on "編集"
+            expect(current_path).to eq edit_user_path(general)
+          end
+          expect(page).to have_content("プロフィール編集")
+          expect(page).to have_content(general.name)
+          expect(page).to have_content(general.profile)
+        end
+
+        it '自分がしたお気に入り一覧が正しく表示されていること' do
+          general.favorites.each{|favorite|
+            expect(page).to have_content(favorite.drama.name)
+            expect(page).to have_selector("img,[src$='#{favorite.drama.image.filename}']")
+          }
+        end
+
+        it '自分がしたレビュー一覧が正しく表示されていること' do
+          general.comments.each{|comment|
+            expect(page).to have_content(comment.content)
+            expect(page).to have_content(comment.drama.name)
+            expect(page).to have_selector("img,[src$='#{comment.drama.image.filename}']")
+          }
+        end
       end
 
-      it '自分がしたお気に入り一覧が正しく表示されていること' do
-        general.favorites.each{|favorite|
-          expect(page).to have_content(favorite.drama.name)
-          expect(page).to have_selector("img,[src$='#{favorite.drama.image.filename}']")
-        }
-      end
+      describe 'レビュー・お気に入り情報が開閉するか（js）', js: true do
+        given(:general) { create :user, :general }
+        given(:drama) { create(:drama) }
+        given(:comment) { create(:comment) }
+        given(:favorite) { create(:favorite, user_id: general.id, drama_id: drama.id) }
+        before do
+          sign_in general
+          general.comments << comment
+          drama.comments << comment
+          visit users_path
+        end
 
-      it '自分がしたレビュー一覧が正しく表示されていること' do
-        general.comments.each{|comment|
-          expect(page).to have_content(comment.content)
-          expect(page).to have_content(comment.drama.name)
-          expect(page).to have_selector("img,[src$='#{comment.drama.image.filename}']")
-        }
+        it 'クリックすると自分がしたお気に入り一覧が表示されること' do
+          general.favorites.each{|favorite|
+            expect(page).to_not have_content(favorite.drama.name)
+            expect(page).to_not have_selector("img,[src$='#{favorite.drama.image.filename}']")
+          }
+          find('.favorite_navi').click
+          general.favorites.each{|favorite|
+            expect(page).to have_content(favorite.drama.name)
+            expect(page).to have_selector("img,[src$='#{favorite.drama.image.filename}']")
+          }
+        end
+
+        it 'クリックすると自分がしたレビュー一覧が表示されること' do
+          general.comments.each{|comment|
+            expect(page).to_not have_content(comment.content)
+          }
+          find('.comment_navi').click
+          general.comments.each{|comment|
+            expect(page).to have_content(comment.content)
+          }
+        end
       end
     end
 
     describe 'ユーザー情報編集ページ' do
-      given(:general) { create :user, :general }
-      before do
-        sign_in general
-        visit edit_user_path(general)
-      end
+      describe 'ユーザー情報編集' do
+        given(:general) { create :user, :general }
+        before do
+          sign_in general
+          visit edit_user_path(general)
+        end
 
-      context 'フォームの入力値が正常' do
-        it 'プロフィール更新が成功すること' do
-          fill_in 'user_name', with: "ぶた"
-          fill_in 'user_profile', with: "ぶたです"
-          attach_file "user_image", "spec/fixtures/files/pig_img.png"
-          click_button '更新'
-          expect(current_path).to eq users_path
-          expect(page).to have_content "プロフィールを更新しました"
-          expect(page).to have_content "ぶた"
-          expect(page).to have_content "ぶたです"
-          expect(page).to have_selector("img[src$='pig_img.png']")
-          expect(page).to_not have_content "general"
+        context 'フォームの入力値が正常' do
+          it 'プロフィール更新が成功すること' do
+            fill_in 'user_name', with: "ぶた"
+            fill_in 'user_profile', with: "ぶたです"
+            attach_file "user_image", "spec/fixtures/files/pig_img.png"
+            click_button '更新'
+            expect(current_path).to eq users_path
+            expect(page).to have_content "プロフィールを更新しました"
+            expect(page).to have_content "ぶた"
+            expect(page).to have_content "ぶたです"
+            expect(page).to have_selector("img[src$='pig_img.png']")
+            expect(page).to_not have_content "general"
+          end
+        end
+
+        context '名前未記入' do
+          it 'プロフィール更新が失敗すること' do
+            fill_in 'user_name', with: ""
+            fill_in 'user_profile', with: "ぶたです"
+            attach_file "user_image", "spec/fixtures/files/pig_img.png"
+            click_button '更新'
+            expect(current_path).to eq "/users/#{general.id}"
+            expect(page).to have_content "プロフィールを更新できませんでした"
+          end
         end
       end
 
-      context '名前未記入' do
-        it 'プロフィール更新が失敗すること' do
-          fill_in 'user_name', with: ""
-          fill_in 'user_profile', with: "ぶたです"
-          attach_file "user_image", "spec/fixtures/files/pig_img.png"
-          click_button '更新'
-          expect(current_path).to eq "/users/#{general.id}"
-          expect(page).to have_content "プロフィールを更新できませんでした"
+      describe 'アイコン画像のプレビューが表示されること（js）', js: true do
+        given(:general) { create :user, :general }
+        before do
+          sign_in general
+          visit edit_user_path(general)
+        end
+
+        it 'アイコン画像がアップデートされること' do
+          expect(page).to_not have_selector("img[src$='pig_img.png']")
+          attach_file('user_image', 'spec/fixtures/files/pig_img.png', make_visible: true)
+          expect(page).to have_selector "img[alt='preview']"
         end
       end
     end

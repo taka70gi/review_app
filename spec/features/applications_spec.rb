@@ -221,5 +221,46 @@ feature 'application', type: :feature do
         end
       end
     end
+
+    describe 'ナビバー開閉（js）', js: true do
+      describe "管理者ログイン" do
+        given!(:admin) { create :user, :admin }
+        given!(:drama) { create(:drama) }
+        before do
+          sign_in admin
+          visit dramas_path
+        end
+        it 'クリックするとナビバーが表示されること' do
+          expect(page).to_not have_text("管理者ページ")
+          expect(page).to_not have_text("ドラマ管理ページ")
+          expect(page).to_not have_text("レビュー管理ページ")
+          expect(page).to_not have_text("ログアウト")
+          find('.hamburger_wide').click
+          expect(page).to have_text("管理者ページ")
+          expect(page).to have_text("ドラマ管理ページ")
+          expect(page).to have_text("レビュー管理ページ")
+          expect(page).to have_text("ログアウト")
+        end
+      end
+
+      describe "一般ログイン" do
+        given!(:general) { create :user, :general }
+        given!(:drama) { create(:drama) }
+        before do
+          sign_in general
+          visit dramas_path
+        end
+
+        it 'クリックするとナビバーが表示されること' do
+          expect(page).to_not have_text("マイページ")
+          expect(page).to_not have_text("アカウント編集")
+          expect(page).to_not have_text("ログアウト")
+          find('.hamburger_wide').click
+          expect(page).to have_text("マイページ")
+          expect(page).to have_text("アカウント編集")
+          expect(page).to have_text("ログアウト")
+        end
+      end
+    end
   end
 end
