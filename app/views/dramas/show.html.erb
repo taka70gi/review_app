@@ -31,7 +31,7 @@
         <table class="font_purple review_table">
           <% @drama.comments.each do |comment| %>
             <tr>
-              <td class="comment_name d_height">
+              <td class="comment_name d_height text_center">
                 <% if @users.find(comment.user_id).image.attached? %>
                   <%= image_tag @users.find(comment.user_id).image, class: "user_icon" %>
                 <% else %>
@@ -39,8 +39,11 @@
                 <% end %>
               </td>
               <td class="drama_comment_wide">
-                <div class="font_black"><%= @users.find(comment.user_id).name %></div>
-                <div><%= comment.content %></div>
+                <div class="font_black comment_user_font"><%= @users.find(comment.user_id).name %></div>
+                <div class="comment_font"><%= comment.content %></div>
+              </td>
+              <td class="drama_app_wide text_center">
+                <%= react_component('App') %>
               </td>
             </tr>
           <% end %>
