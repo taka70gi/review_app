@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+  get 'likes/destroy'
   get 'homes/index'
   root 'dramas#index'
   get 'favorites/index'
@@ -13,12 +15,17 @@ Rails.application.routes.draw do
   resources :dramas
   resources :comments
   resources :homes, only: [:index]
-
   resources :users, only: [:show, :edit, :update] do
     get :favorites, on: :collection
   end
   resources :dramas, expect: [:index] do
     resource :favorites, only: [:create, :destroy]
+  end
+  resources :users, only: [:show, :edit, :update] do
+    get :likes, on: :collection
+  end
+  resources :comment, expect: [:index] do
+    resource :likes, only: [:create, :destroy]
   end
   namespace :admin do
     resources :dramas, only: [:index, :new, :create, :show, :edit, :update, :destroy]
