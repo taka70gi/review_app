@@ -15,21 +15,39 @@
         <h5 class="summary_head">出演者</h5>
         <div><%= @drama.cast %></div>
         <% if current_user.nil? %>
-          <%= render "shared/favorite_review", drama: @drama %>
+          <div class="list">
+            <div>
+              <%= link_to new_comment_path(id: @drama.id), class: "comment_btn" do %>
+                <h4>レビューを投稿</h4>
+              <% end %>
+            </div>
+            <div id="favorites_buttons_<%= @drama.id %>">
+              <%= render "favorites/favorite", drama: @drama %>
+            </div>
+          </div>
         <% else %>
           <% if @user.admin == false %>
-            <%= render "shared/favorite_review", drama: @drama %>
+            <div class="list">
+              <div>
+                <%= link_to new_comment_path(id: @drama.id), class: "comment_btn" do %>
+                  <h4>レビューを投稿</h4>
+                <% end %>
+              </div>
+              <div id="favorites_buttons_<%= @drama.id %>">
+                <%= render "favorites/favorite", drama: @drama %>
+              </div>
+            </div>
           <% end %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-<% if @drama.comments.count != 0 %>
+<% if @comments.count != 0 %>
   <div class="layout_position">
     <div class="layout_item_back white_color dark_color_position">
         <table class="font_purple review_table">
-          <% @drama.comments.each do |comment| %>
+          <% @comments.each do |comment| %>
             <tr>
               <td class="comment_name d_height text_center">
                 <% if @users.find(comment.user_id).image.attached? %>
@@ -43,17 +61,9 @@
                 <div class="comment_font"><%= comment.content %></div>
               </td>
               <td class="drama_app_wide text_center">
-
-                <% if comment.liked_by(current_user) %>
-                  <%= link_to comment_likes_path(comment, drama_id: @drama.id), method: :delete, class: "favorited_btn" do %>
-                    <h4 class="link_margin"><span class="heart_red"></span> <%= comment.likes.count %></h4>
-                  <% end %>
-                <% else %>
-                  <%= link_to comment_likes_path(comment, drama_id: @drama.id), method: :comment, class: "no_favorited_btn" do %>
-                    <h4 class="link_margin"><span class="heart_white"></span> <%= comment.likes.count %></h4>
-                  <% end %>
-                <% end %>
-
+                <div id="likes_buttons_<%= comment.id %>">
+                  <%= render 'likes/like', comment: comment, drama: @drama %>
+                </div>
               </td>
             </tr>
           <% end %>

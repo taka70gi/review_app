@@ -301,3 +301,104 @@ li{
 .search_position{
   display: flex;
 }
+.no_favorited_btn{
+  color: #b1b1b1;
+  text-decoration: none;
+}
+.favorited_btn{
+  color: #ffff00;
+  text-decoration: none;
+}
+.no_like_btn{
+  color: #b1b1b1;
+  text-decoration: none;
+}
+.like_btn{
+  color: red;
+  text-decoration: none;
+}
+.comment_btn{
+  color: #729ceb;
+  text-decoration: none;
+}
+.heart_red {
+  display: inline-block;
+  color: #333;/*線の色*/
+  position: relative;
+  margin-top: 6px;/*要調整*/
+  margin-left: 5px;/*要調整*/
+  width: 9px;
+  height: 9px;
+  border-left: solid 1px currentColor;
+  border-bottom: solid 1px currentColor;
+  transform: rotate(-45deg) scale(1);/*scale要調整*/
+  background: red;/*背景色*/
+}
+.heart_red:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -1px;
+  width: 8px;
+  height: 5px;
+  border-radius: 5px 5px 0 0;
+  border-top: solid 1px currentColor;
+  border-left: solid 1px currentColor;
+  border-right: solid 1px currentColor;
+  background: red;/*背景色*/
+}
+.heart_red:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 8px;
+  width: 5px;
+  height: 8px;
+  border-radius: 0 5px 5px 0;
+  border-top: solid 1px currentColor;
+  border-right: solid 1px currentColor;
+  border-bottom: solid 1px currentColor;
+  background: red;/*背景色*/
+}
+.heart_white {
+  display: inline-block;
+  color: #333;/*線の色*/
+  position: relative;
+  margin-top: 6px;/*要調整*/
+  margin-left: 5px;/*要調整*/
+  width: 9px;
+  height: 9px;
+  border-left: solid 1px currentColor;
+  border-bottom: solid 1px currentColor;
+  transform: rotate(-45deg) scale(1);/*scale要調整*/
+  background: #b1b1b1;/*背景色*/
+}
+.heart_white:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -1px;
+  width: 8px;
+  height: 5px;
+  border-radius: 5px 5px 0 0;
+  border-top: solid 1px currentColor;
+  border-left: solid 1px currentColor;
+  border-right: solid 1px currentColor;
+  background: #b1b1b1;/*背景色*/
+}
+.heart_white:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 8px;
+  width: 5px;
+  height: 8px;
+  border-radius: 0 5px 5px 0;
+  border-top: solid 1px currentColor;
+  border-right: solid 1px currentColor;
+  border-bottom: solid 1px currentColor;
+  background: #b1b1b1;/*背景色*/
+}
+.link_margin{
+  margin-left: 25px;
+}
