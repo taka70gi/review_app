@@ -8,20 +8,15 @@ RSpec.describe "Favorites", type: :request do
       sign_in general
     end
 
-    it 'レスポンスのステータスコードが302であること' do
-      post drama_favorites_path(drama)
-      expect(response.status).to eq 302
+    it 'レスポンスのステータスコードが200であること' do
+      post drama_favorites_path(drama), xhr: true
+      expect(response.status).to eq 200
     end
 
     it 'お気に入りが登録されること' do
       expect do
-        post drama_favorites_path(drama)
+        post drama_favorites_path(drama), xhr: true
       end.to change(Favorite, :count).by(1)
-    end
-
-    it 'お気に入りが登録後ドラマ詳細画面へリダイレクトすること' do
-      post drama_favorites_path(drama)
-      expect(response).to redirect_to drama_path(drama)
     end
   end
 
@@ -32,22 +27,17 @@ RSpec.describe "Favorites", type: :request do
       sign_in general
     end
 
-    it 'レスポンスのステータスコードが302であること' do
-      delete drama_favorites_path(drama)
-      expect(response.status).to eq 302
+    it 'レスポンスのステータスコードが200であること' do
+      post drama_favorites_path(drama), xhr: true
+      delete drama_favorites_path(drama), xhr: true
+      expect(response.status).to eq 200
     end
 
     it 'お気に入りが解除されること' do
       expect do
-        #お気に入り登録後、削除し個数の変化を確認
-        post drama_favorites_path(drama)
-        delete drama_favorites_path(drama)
+        post drama_favorites_path(drama), xhr: true
+        delete drama_favorites_path(drama), xhr: true
       end.to change(Favorite, :count).by(0)
-    end
-
-    it 'お気に入りが登録後ドラマ詳細画面へリダイレクトすること' do
-      delete drama_favorites_path(drama)
-      expect(response).to redirect_to drama_path(drama)
     end
   end
 end
