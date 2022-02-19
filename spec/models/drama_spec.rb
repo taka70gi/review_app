@@ -9,7 +9,7 @@ RSpec.describe "Drama", type: :model do
       summary: "パラグライダー中に思わぬ事故に巻き込まれ、北朝鮮に不時着してしまった韓国の財閥令嬢。そこで出会った堅物の将校の家で、身分を隠して暮らすことになるが...。",
       cast: "ヒョンビン、ソン・イェジン、ソ・ジヘ",
       release_day: 2019,
-      image:  Rack::Test::UploadedFile.new("spec/fixtures/star.png", "image/jpg"),
+      image:  Rack::Test::UploadedFile.new("spec/fixtures/files/star_img.png", "image/jpg"),
     )
     expect(drama).to be_valid
   end
