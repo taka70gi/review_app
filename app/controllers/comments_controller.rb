@@ -22,19 +22,16 @@ class CommentsController < ApplicationController
     end
   end
 
-  def show
-    @user = current_user
-    @comment = Comment.new
-  end
-
   def edit
     @user = current_user
     @comment = Comment.find(params[:id])
+    @drama = @comment.drama
   end
 
   def update
     @user = current_user
     @comment = Comment.find(params[:id])
+    @drama = @comment.drama
     if @comment.update(comments_params)
       flash[:notice] = "レビューを更新しました"
       redirect_to users_path
