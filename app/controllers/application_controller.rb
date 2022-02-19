@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
       dramas_path
     end
   end
+
+  def after_sign_out_path_for(resource)
+    dramas_path
+  end
 end
