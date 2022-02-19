@@ -74,7 +74,7 @@ feature 'drama', type: :feature do
 
       it 'お気に入り登録を押すとログインページへのリンクが正しくされていること' do
         within("div.drama_right") do
-          click_on "お気に入り登録"
+          click_on "お気に入り"
           expect(current_path).to eq new_user_session_path
         end
       end
@@ -210,14 +210,6 @@ feature 'drama', type: :feature do
         it 'ドラマ出演者が表示されること' do
           within("div.drama_right") do
             expect(page).to have_content(drama.cast)
-          end
-        end
-
-        it 'お気に入り登録されること' do
-          within("div.drama_right") do
-            click_on "お気に入り登録済"
-            expect(current_path).to eq drama_path(drama)
-            expect(page).to have_content("お気に入り登録")
           end
         end
 
