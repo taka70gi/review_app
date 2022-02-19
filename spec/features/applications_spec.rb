@@ -199,7 +199,7 @@ feature 'application', type: :feature do
         it 'マイページのリンクが正しくされていること' do
           within("ul.header-nav-menu") do
             click_on "マイページ"
-            expect(current_path).to eq users_path
+            expect(current_path).to eq user_path(general)
           end
         end
 

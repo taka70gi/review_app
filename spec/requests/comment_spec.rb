@@ -137,7 +137,7 @@ RSpec.describe "Comments", type: :request do
 
       it 'マイページへリダイレクトすること' do
         patch comment_path(comment), params: { comment: {content: "アップデート", user_id: comment.user_id, drama_id: comment.drama_id }}
-        expect(response).to redirect_to users_path
+        expect(response).to redirect_to user_path(general)
       end
     end
 
@@ -185,7 +185,7 @@ RSpec.describe "Comments", type: :request do
 
     it 'マイページにリダイレクトすること' do
       delete comment_path(comment)
-      expect(response).to redirect_to(users_path)
+      expect(response).to redirect_to(user_path(general))
     end
   end
 end

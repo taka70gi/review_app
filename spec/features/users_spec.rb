@@ -25,7 +25,7 @@ feature 'users', type: :feature do
           fill_in 'user_password', with: "password"
           fill_in 'user_password_confirmation', with: "password"
           click_button '登録'
-          expect(current_path).to eq users_path
+          expect(current_path).to eq '/users'
           expect(page).to have_content " ユーザー は保存されませんでした。"
         end
       end
@@ -38,7 +38,7 @@ feature 'users', type: :feature do
           fill_in 'user_password', with: "password"
           fill_in 'user_password_confirmation', with: "password"
           click_button '登録'
-          expect(current_path).to eq users_path
+          expect(current_path).to eq '/users'
           expect(page).to have_content " ユーザー は保存されませんでした。"
           expect(page).to have_content "メールアドレスはすでに存在します"
         end
@@ -51,7 +51,7 @@ feature 'users', type: :feature do
           fill_in 'user_password', with: "password"
           fill_in 'user_password_confirmation', with: "password"
           click_button '登録'
-          expect(current_path).to eq users_path
+          expect(current_path).to eq '/users'
           expect(page).to have_content " ユーザー は保存されませんでした。"
           expect(page).to have_content "名前を入力してください"
         end
@@ -122,7 +122,7 @@ feature 'users', type: :feature do
           sign_in general
           general.comments << comment
           drama.comments << comment
-          visit users_path
+          visit user_path(general)
         end
 
         it 'ユーザー編集ページへのリンクが正しくされていること' do
@@ -160,7 +160,7 @@ feature 'users', type: :feature do
           sign_in general
           general.comments << comment
           drama.comments << comment
-          visit users_path
+          visit user_path(general)
         end
 
         it 'クリックすると自分がしたお気に入り一覧が表示されること' do
@@ -201,7 +201,7 @@ feature 'users', type: :feature do
             fill_in 'user_profile', with: "ぶたです"
             attach_file "user_image", "spec/fixtures/files/pig_img.png"
             click_button '更新'
-            expect(current_path).to eq users_path
+            expect(current_path).to eq user_path(general)
             expect(page).to have_content "プロフィールを更新しました"
             expect(page).to have_content "ぶた"
             expect(page).to have_content "ぶたです"
@@ -233,6 +233,66 @@ feature 'users', type: :feature do
           expect(page).to_not have_selector("img[src$='pig_img.png']")
           attach_file('user_image', 'spec/fixtures/files/pig_img.png', make_visible: true)
           expect(page).to have_selector "img[alt='preview']"
+        end
+      end
+    end
+
+    describe "ユーザー管理ページ" do
+      describe "ユーザーが存在" do
+        given!(:admin) { create :user, :admin }
+        given!(:user01) { create :user, name: "ユーザー１" }
+        given!(:user02) { create :user, name: "ユーザー2" }
+
+        before do
+          sign_in admin
+          visit users_path
+        end
+
+        it '登録されているユーザーが全て表示されること' do
+          within("table.admin_index") do
+            expect(page).to have_content(user01.name)
+            expect(page).to have_content(user02.name)
+          end
+        end
+
+        it 'ユーザー画像が表示されること' do
+          within("table.admin_index") do
+            expect(page).to have_selector("img,[src$='#{user01.image.filename}']")
+            expect(page).to have_selector("img,[src$='#{user02.image.filename}']")
+          end
+        end
+
+        it '削除後、管理者ページへのリンクが正しくされていること' do
+          within("table.admin_index") do
+            click_on "削除", match: :first
+            expect(current_path).to eq users_path
+          end
+        end
+
+        it '管理者ページへのリンクが正しくされていること' do
+          within("div.return_link_position") do
+            click_on "管理者ページへ戻る", match: :first
+            expect(current_path).to eq homes_path
+          end
+        end
+      end
+
+      describe "レビューが非存在" do
+        given!(:admin) { create :user, :admin }
+        before do
+          sign_in admin
+          visit users_path
+        end
+
+        it '削除が表示されていないこと' do
+          expect(page).not_to have_content '削除'
+        end
+
+        it '管理者ページへのリンクが正しくされていること' do
+          within("div.return_link_position") do
+            click_on "管理者ページへ戻る", match: :first
+            expect(current_path).to eq homes_path
+          end
         end
       end
     end

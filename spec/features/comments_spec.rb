@@ -172,7 +172,7 @@ feature 'comment', type: :feature do
       it 'マイページへ遷移すること' do
         fill_in 'comment_content', with: "テストデータを投稿しました"
         click_button 'レビューを投稿'
-        expect(current_path).to eq users_path
+        expect(current_path).to eq user_path(general)
         expect(page).to have_content "レビューを更新しました"
       end
 
@@ -191,7 +191,7 @@ feature 'comment', type: :feature do
       it 'マイページへのリンクが正しくされていること' do
         within("div.return_link_position") do
           click_on "戻る"
-          expect(current_path).to eq users_path
+          expect(current_path).to eq user_path(general)
         end
       end
 
@@ -233,7 +233,7 @@ feature 'comment', type: :feature do
       it 'マイページへのリンクが正しくされていること' do
         within("div.return_link_position") do
           click_on "戻る"
-          expect(current_path).to eq users_path
+          expect(current_path).to eq user_path(general)
         end
       end
 
