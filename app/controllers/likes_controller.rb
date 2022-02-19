@@ -1,28 +1,18 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
+  before_action :target_find
 
   def create
-    @comment = Comment.find(params[:comment_id])
-    @drama = Drama.find(params[:drama_id])
-    like = @comment.likes.new(user_id: current_user.id)
-    if like.save
-      flash[:notice] = "いいね登録しました"
-      redirect_to drama_path(@drama)
-    else
-      redirect_to drama_path(@drama)
-    end
+    Like.create(user_id: current_user.id, comment_id: params[:comment_id])
   end
 
   def destroy
+    like = Like.find_by(user_id: current_user.id, comment_id: params[:comment_id])
+    like.destroy
+  end
+
+  def target_find
+    @drama = Drama.find(params[:dramaid])
     @comment = Comment.find(params[:comment_id])
-    @drama = Drama.find(params[:drama_id])
-    like = @comment.likes.find_by(user_id: current_user.id)
-    if like.present?
-      flash[:notice] = "いいね解除しました"
-      like.destroy
-      redirect_to drama_path(@drama)
-    else
-      redirect_to drama_path(@drama)
-    end
   end
 end

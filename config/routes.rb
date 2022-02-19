@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
-  get 'likes/create'
-  get 'likes/destroy'
   get 'homes/index'
   root 'dramas#index'
-  get 'favorites/index'
   get 'users/index'
   get 'dramas/index'
   get 'comments/index'
   get 'dramas/search' => 'dramas#search'
+
+  post 'like/:id' => 'likes#create', as: 'create_like'
+  delete 'like/:id' => 'likes#destroy', as: 'destroy_like'
+  post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
+  delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
+
   devise_for :users
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
