@@ -83,7 +83,6 @@ li{
   -webkit-background-clip: text;
   color: transparent;
 }
-
 .font_white{
   color: #fff;
 }
@@ -134,6 +133,10 @@ li{
 .area_size{
   width: 100%;
   height: 120px;
+}
+.link_wide{
+  width: 80px;
+  text-align: center;
 }
 .btn{
   display: inline-block;

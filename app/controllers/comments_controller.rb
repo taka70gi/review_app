@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
     @drama = @comment.drama
     if @comment.update(comments_params)
       flash[:notice] = "レビューを更新しました"
-      redirect_to users_path
+      redirect_to user_path(@user)
     else
       flash[:alert] = "レビューを更新できませんでした"
       render "edit"
@@ -43,15 +43,15 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @user = current_user
     @comment = Comment.find(params[:id])
     @comment.destroy
     flash[:notice] = "レビューを削除しました"
     if current_user.admin?
       redirect_to comments_path
     else
-      redirect_to :users
+      redirect_to user_path(@user)
     end
-
   end
 end
 

@@ -1,17 +1,12 @@
 class UsersController < ApplicationController
   def index
-    @user = current_user
-    @favorites = Favorite.where(user_id: current_user.id)
-    @comments = @user.comments
-  end
-
-  def new
-  end
-
-  def create
+    @users = User.all
   end
 
   def show
+    @user = current_user
+    @favorites = Favorite.where(user_id: current_user.id)
+    @comments = @user.comments
   end
 
   def edit
@@ -22,7 +17,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update(users_params)
       flash[:notice] = "プロフィールを更新しました"
-      redirect_to :users
+      redirect_to user_path(@user)
     else
       flash.now[:alert] = "プロフィールを更新できませんでした"
       render "edit"
@@ -30,6 +25,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    User.find(params[:id]).destroy
+    flash[:notice] = "ユーザーを削除しました"
+    redirect_to users_path
   end
 end
 private

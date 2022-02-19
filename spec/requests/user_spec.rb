@@ -2,6 +2,26 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
   describe "index" do
+    let!(:admin) { create :user, :admin }
+    let!(:user01) { create :user }
+    let!(:user02) { create :user }
+
+    before do
+      sign_in admin
+      get users_path
+    end
+
+    it 'レスポンスのステータスコードが200であること' do
+      expect(response.status).to eq 200
+    end
+
+    it 'レスポンスボディにユーザー名が存在すること' do
+      expect(response.body).to include user01.name
+      expect(response.body).to include user02.name
+    end
+  end
+
+  describe "show" do
     let!(:general) { create :user, :general }
     let!(:comment) { create(:comment) }
     let!(:favorite) { create(:favorite) }
@@ -9,7 +29,7 @@ RSpec.describe "Users", type: :request do
       sign_in general
       general.comments << comment
       general.favorites << favorite
-      get users_path
+      get user_path(general)
     end
 
     it 'レスポンスのステータスコードが200であること' do
@@ -77,7 +97,7 @@ RSpec.describe "Users", type: :request do
       it 'マイページへリダイレクトすること' do
         user_params = FactoryBot.attributes_for(:user, image: fixture_file_upload("spec/fixtures/files/star_img.png"), name: "アップデート")
         patch user_path(general), params: { user: user_params }
-        expect(response).to redirect_to users_path
+        expect(response).to redirect_to user_path(general)
       end
     end
 
@@ -106,6 +126,30 @@ RSpec.describe "Users", type: :request do
         patch user_path(general), params: { user: user_params }
         expect(response.body).to include "プロフィールを更新できませんでした"
       end
+    end
+  end
+
+  describe "delete" do
+    let!(:admin) { create :user, :admin }
+    let!(:user) { create :user, :general }
+    before do
+      sign_in admin
+    end
+
+    it 'レスポンスのステータスコードが302であること' do
+      delete user_path(user)
+      expect(response.status).to eq 302
+    end
+
+    it 'ユーザーが削除されること' do
+      expect do
+        delete user_path(user)
+      end.to change(User, :count).by(-1)
+    end
+
+    it 'ユーザー管理画面にリダイレクトすること' do
+      delete user_path(user)
+      expect(response).to redirect_to(users_path)
     end
   end
 end
