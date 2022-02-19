@@ -214,7 +214,6 @@ feature 'application', type: :feature do
           within("ul.header-nav-menu") do
             click_on "ログアウト"
             logout general
-            binding.pry
             expect(page).to have_current_path(dramas_path)
             expect(current_path).to eq dramas_path
           end
