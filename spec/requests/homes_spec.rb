@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Homes", type: :request do
   describe "index" do
@@ -9,7 +9,7 @@ RSpec.describe "Homes", type: :request do
       get homes_path
     end
 
-    it 'レスポンスのステータスコードが200であること' do
+    it "レスポンスのステータスコードが200であること" do
       expect(response.status).to eq 200
     end
   end

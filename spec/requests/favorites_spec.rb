@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Favorites", type: :request do
   describe "create" do
@@ -8,12 +8,12 @@ RSpec.describe "Favorites", type: :request do
       sign_in general
     end
 
-    it 'レスポンスのステータスコードが200であること' do
+    it "レスポンスのステータスコードが200であること" do
       post drama_favorites_path(drama), xhr: true
       expect(response.status).to eq 200
     end
 
-    it 'お気に入りが登録されること' do
+    it "お気に入りが登録されること" do
       expect do
         post drama_favorites_path(drama), xhr: true
       end.to change(Favorite, :count).by(1)
@@ -27,13 +27,13 @@ RSpec.describe "Favorites", type: :request do
       sign_in general
     end
 
-    it 'レスポンスのステータスコードが200であること' do
+    it "レスポンスのステータスコードが200であること" do
       post drama_favorites_path(drama), xhr: true
       delete drama_favorites_path(drama), xhr: true
       expect(response.status).to eq 200
     end
 
-    it 'お気に入りが解除されること' do
+    it "お気に入りが解除されること" do
       expect do
         post drama_favorites_path(drama), xhr: true
         delete drama_favorites_path(drama), xhr: true

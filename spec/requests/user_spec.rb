@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Users", type: :request do
   describe "index" do
@@ -11,11 +11,11 @@ RSpec.describe "Users", type: :request do
       get users_path
     end
 
-    it 'レスポンスのステータスコードが200であること' do
+    it "レスポンスのステータスコードが200であること" do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディにユーザー名が存在すること' do
+    it "レスポンスボディにユーザー名が存在すること" do
       expect(response.body).to include user01.name
       expect(response.body).to include user02.name
     end
@@ -32,25 +32,25 @@ RSpec.describe "Users", type: :request do
       get user_path(general)
     end
 
-    it 'レスポンスのステータスコードが200であること' do
+    it "レスポンスのステータスコードが200であること" do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディにログインユーザー名が存在すること' do
+    it "レスポンスボディにログインユーザー名が存在すること" do
       expect(response.body).to include general.name
     end
 
-    it 'レスポンスボディにログインユーザーのプロフィールが存在すること' do
+    it "レスポンスボディにログインユーザーのプロフィールが存在すること" do
       expect(response.body).to include general.profile
     end
 
-    it 'レスポンスボディにログインユーザーのレビューが存在すること' do
-      general.comments.each{|general_comment|
+    it "レスポンスボディにログインユーザーのレビューが存在すること" do
+      general.comments.each { |general_comment|
         expect(response.body).to include general_comment.content
       }
     end
 
-    it 'レスポンスボディにログインユーザーのお気に入りドラマが存在すること' do
+    it "レスポンスボディにログインユーザーのお気に入りドラマが存在すること" do
       expect(response.body).to include favorite.drama.name
     end
   end
@@ -62,15 +62,15 @@ RSpec.describe "Users", type: :request do
       get edit_user_path(general)
     end
 
-    it 'レスポンスのステータスコードが200であること' do
+    it "レスポンスのステータスコードが200であること" do
       expect(response.status).to eq 200
     end
 
-    it 'レスポンスボディにユーザー名が存在すること' do
+    it "レスポンスボディにユーザー名が存在すること" do
       expect(response.body).to include general.name
     end
 
-    it 'レスポンスボディにユーザー自己紹介が存在すること' do
+    it "レスポンスボディにユーザー自己紹介が存在すること" do
       expect(response.body).to include general.profile
     end
   end
@@ -80,48 +80,48 @@ RSpec.describe "Users", type: :request do
     before do
       sign_in general
     end
-    context 'パラメータが妥当な場合' do
-      it 'レスポンスのステータスコードが302であること' do
+    context "パラメータが妥当な場合" do
+      it "レスポンスのステータスコードが302であること" do
         user_params = FactoryBot.attributes_for(:user, image: fixture_file_upload("spec/fixtures/files/star_img.png"), name: "アップデート")
         patch user_path(general), params: { user: user_params }
         expect(response.status).to eq 302
       end
 
-      it 'ユーザー名が更新されること' do
+      it "ユーザー名が更新されること" do
         expect do
           user_params = FactoryBot.attributes_for(:user, image: fixture_file_upload("spec/fixtures/files/star_img.png"), name: "アップデート")
           patch user_path(general), params: { user: user_params }
         end.to change { User.find(general.id).name }.from(general.name).to("アップデート")
       end
 
-      it 'マイページへリダイレクトすること' do
+      it "マイページへリダイレクトすること" do
         user_params = FactoryBot.attributes_for(:user, image: fixture_file_upload("spec/fixtures/files/star_img.png"), name: "アップデート")
         patch user_path(general), params: { user: user_params }
         expect(response).to redirect_to user_path(general)
       end
     end
 
-    context 'パラメータが不正な場合' do
-      it 'レスポンスのステータスコードが200であること' do
+    context "パラメータが不正な場合" do
+      it "レスポンスのステータスコードが200であること" do
         user_params = FactoryBot.attributes_for(:user, image: fixture_file_upload("spec/fixtures/files/star_img.png"), name: "")
         patch user_path(general), params: { user: user_params }
         expect(response.status).to eq 200
       end
 
-      it 'ユーザー名が更新されないこと' do
+      it "ユーザー名が更新されないこと" do
         expect do
           user_params = FactoryBot.attributes_for(:user, image: fixture_file_upload("spec/fixtures/files/star_img.png"), name: "")
           patch user_path(general), params: { user: user_params }
         end.to_not change(User.find(general.id), :name)
       end
 
-      it 'editテンプレートで表示されること' do
+      it "editテンプレートで表示されること" do
         user_params = FactoryBot.attributes_for(:user, image: fixture_file_upload("spec/fixtures/files/star_img.png"), name: "")
         patch user_path(general), params: { user: user_params }
         expect(response).to render_template :edit
       end
 
-      it '”ユーザー名を更新できませんでした”のエラーが表示されること' do
+      it "”ユーザー名を更新できませんでした”のエラーが表示されること" do
         user_params = FactoryBot.attributes_for(:user, image: fixture_file_upload("spec/fixtures/files/star_img.png"), name: "")
         patch user_path(general), params: { user: user_params }
         expect(response.body).to include "プロフィールを更新できませんでした"
@@ -136,18 +136,18 @@ RSpec.describe "Users", type: :request do
       sign_in admin
     end
 
-    it 'レスポンスのステータスコードが302であること' do
+    it "レスポンスのステータスコードが302であること" do
       delete user_path(user)
       expect(response.status).to eq 302
     end
 
-    it 'ユーザーが削除されること' do
+    it "ユーザーが削除されること" do
       expect do
         delete user_path(user)
       end.to change(User, :count).by(-1)
     end
 
-    it 'ユーザー管理画面にリダイレクトすること' do
+    it "ユーザー管理画面にリダイレクトすること" do
       delete user_path(user)
       expect(response).to redirect_to(users_path)
     end

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Likes", type: :request do
   describe "create" do
@@ -9,12 +9,12 @@ RSpec.describe "Likes", type: :request do
       sign_in general
     end
 
-    it 'レスポンスのステータスコードが200であること' do
+    it "レスポンスのステータスコードが200であること" do
       post comment_likes_path(comment, dramaid: drama.id), xhr: true
       expect(response.status).to eq 200
     end
 
-    it 'いいねが登録されること' do
+    it "いいねが登録されること" do
       expect do
         post comment_likes_path(comment, dramaid: drama.id), xhr: true
       end.to change(Like, :count).by(1)
@@ -29,13 +29,13 @@ RSpec.describe "Likes", type: :request do
       sign_in general
     end
 
-    it 'レスポンスのステータスコードが200であること' do
+    it "レスポンスのステータスコードが200であること" do
       post comment_likes_path(comment, dramaid: drama.id), xhr: true
       delete comment_likes_path(comment, dramaid: drama.id), xhr: true
       expect(response.status).to eq 200
     end
 
-    it 'いいねが解除されること' do
+    it "いいねが解除されること" do
       expect do
         post comment_likes_path(comment, dramaid: drama.id), xhr: true
         delete comment_likes_path(comment, dramaid: drama.id), xhr: true

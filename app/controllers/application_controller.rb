@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(*)
     if current_user.admin?
       homes_path
     else
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def after_sign_out_path_for(resource)
+  def after_sign_out_path_for(*)
     dramas_path
   end
 end

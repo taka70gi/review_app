@@ -43,12 +43,14 @@ class Admin::DramasController < ApplicationController
   end
 
   private
+
   def if_not_admin
     redirect_to root_path unless current_user.admin?
   end
 end
 
 private
+
 def dramas_params
   params.require(:drama).permit(:name, :release_day, :image, :summary, :cast)
 end

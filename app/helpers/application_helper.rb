@@ -6,6 +6,6 @@ module ApplicationHelper
   end
 
   def load_user
-    return current_user
+    current_user
   end
 end
