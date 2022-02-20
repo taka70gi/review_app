@@ -106,9 +106,9 @@ feature "application", type: :feature do
 
         it "ドラマ画像が表示されること" do
           within("div.list") do
-            expect(page).to have_selector("img,[src$="#{drama01.image.filename}"]")
-            expect(page).to have_selector("img,[src$="#{drama02.image.filename}"]")
-            expect(page).to have_selector("img,[src$="#{drama02.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{drama01.image.filename}']")
+            expect(page).to have_selector("img,[src$='#{drama02.image.filename}']")
+            expect(page).to have_selector("img,[src$='#{drama02.image.filename}']")
           end
         end
 

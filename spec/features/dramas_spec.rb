@@ -19,9 +19,9 @@ feature "drama", type: :feature do
 
     it "ドラマ画像が表示されること" do
       within("div.list") do
-        expect(page).to have_selector("img,[src$="#{drama01.image.filename}"]")
-        expect(page).to have_selector("img,[src$="#{drama02.image.filename}"]")
-        expect(page).to have_selector("img,[src$="#{drama02.image.filename}"]")
+        expect(page).to have_selector("img,[src$='#{drama01.image.filename}']")
+        expect(page).to have_selector("img,[src$='#{drama02.image.filename}']")
+        expect(page).to have_selector("img,[src$='#{drama02.image.filename}']")
       end
     end
 
@@ -50,7 +50,7 @@ feature "drama", type: :feature do
 
       it "ドラマ画像が表示されること" do
         within("div.drama_left") do
-          expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
         end
       end
 
@@ -98,7 +98,7 @@ feature "drama", type: :feature do
         within("table.review_table") do
           drama.comments.each{|drama_comment|
             expect(page).to have_content(drama_comment.user.name)
-          expect(page).to have_selector("img,[src$="#{drama_comment.user.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{drama_comment.user.image.filename}']")
           }
         end
       end
@@ -131,7 +131,7 @@ feature "drama", type: :feature do
 
         it "ドラマ画像が表示されること" do
           within("div.drama_left") do
-            expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
           end
         end
 
@@ -165,7 +165,7 @@ feature "drama", type: :feature do
           within("table.review_table") do
             drama.comments.each{|drama_comment|
               expect(page).to have_content(drama_comment.user.name)
-            expect(page).to have_selector("img,[src$="#{drama_comment.user.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{drama_comment.user.image.filename}']")
             }
           end
         end
@@ -191,7 +191,7 @@ feature "drama", type: :feature do
 
         it "ドラマ画像が表示されること" do
           within("div.drama_left") do
-            expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
           end
         end
 
@@ -232,7 +232,7 @@ feature "drama", type: :feature do
           within("table.review_table") do
             drama.comments.each{|drama_comment|
               expect(page).to have_content(drama_comment.user.name)
-            expect(page).to have_selector("img,[src$="#{drama_comment.user.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{drama_comment.user.image.filename}']")
             }
           end
         end

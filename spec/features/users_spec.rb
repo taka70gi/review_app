@@ -138,7 +138,7 @@ feature "users", type: :feature do
         it "自分がしたお気に入り一覧が正しく表示されていること" do
           general.favorites.each{|favorite|
             expect(page).to have_content(favorite.drama.name)
-            expect(page).to have_selector("img,[src$="#{favorite.drama.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{favorite.drama.image.filename}']")
           }
         end
 
@@ -146,7 +146,7 @@ feature "users", type: :feature do
           general.comments.each{|comment|
             expect(page).to have_content(comment.content)
             expect(page).to have_content(comment.drama.name)
-            expect(page).to have_selector("img,[src$="#{comment.drama.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{comment.drama.image.filename}']")
           }
         end
       end
@@ -166,12 +166,12 @@ feature "users", type: :feature do
         it "クリックすると自分がしたお気に入り一覧が表示されること" do
           general.favorites.each{|favorite|
             expect(page).to_not have_content(favorite.drama.name)
-            expect(page).to_not have_selector("img,[src$="#{favorite.drama.image.filename}"]")
+            expect(page).to_not have_selector("img,[src$='#{favorite.drama.image.filename}']")
           }
           find(".favorite_navi").click
           general.favorites.each{|favorite|
             expect(page).to have_content(favorite.drama.name)
-            expect(page).to have_selector("img,[src$="#{favorite.drama.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{favorite.drama.image.filename}']")
           }
         end
 
@@ -205,7 +205,7 @@ feature "users", type: :feature do
             expect(page).to have_content "プロフィールを更新しました"
             expect(page).to have_content "ぶた"
             expect(page).to have_content "ぶたです"
-            expect(page).to have_selector("img[src$="pig_img.png"]")
+            expect(page).to have_selector("img[src$='pig_img.png']")
             expect(page).to_not have_content "general"
           end
         end
@@ -230,9 +230,9 @@ feature "users", type: :feature do
         end
 
         it "アイコン画像がアップデートされること" do
-          expect(page).to_not have_selector("img[src$="pig_img.png"]")
+          expect(page).to_not have_selector("img[src$='pig_img.png']")
           attach_file("user_image", "spec/fixtures/files/pig_img.png", make_visible: true)
-          expect(page).to have_selector "img[alt="preview"]"
+          expect(page).to have_selector "img[alt='preview']"
         end
       end
     end
@@ -257,8 +257,8 @@ feature "users", type: :feature do
 
         it "ユーザー画像が表示されること" do
           within("table.admin_index") do
-            expect(page).to have_selector("img,[src$="#{user01.image.filename}"]")
-            expect(page).to have_selector("img,[src$="#{user02.image.filename}"]")
+            expect(page).to have_selector("img,[src$='#{user01.image.filename}']")
+            expect(page).to have_selector("img,[src$='#{user02.image.filename}']")
           end
         end
 

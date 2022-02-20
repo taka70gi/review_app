@@ -18,7 +18,7 @@ feature "admin::drama", type: :feature do
 
       it "ドラマ画像が表示されること" do
         within("table.admin_index") do
-          expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
         end
       end
 
@@ -71,9 +71,9 @@ feature "admin::drama", type: :feature do
 
       it "ドラマ画像が登録ドラマの数分表示されること" do
         within("table.admin_index") do
-          expect(page).to have_selector("img,[src$="#{drama01.image.filename}"]")
-          expect(page).to have_selector("img,[src$="#{drama02.image.filename}"]")
-          expect(page).to have_selector("img,[src$="#{drama03.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{drama01.image.filename}']")
+          expect(page).to have_selector("img,[src$='#{drama02.image.filename}']")
+          expect(page).to have_selector("img,[src$='#{drama03.image.filename}']")
         end
       end
 
@@ -284,7 +284,7 @@ feature "admin::drama", type: :feature do
           click_on "更新"
           expect(page).to have_content "ドラマ登録内容を更新しました"
           expect(page).to have_content "愛の不時着"
-          expect(page).to have_selector("img[src$="pig_img.png"]")
+          expect(page).to have_selector("img[src$='pig_img.png']")
           expect(page).to_not have_content "トッケビ"
         end
       end

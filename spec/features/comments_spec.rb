@@ -34,8 +34,8 @@ feature "comment", type: :feature do
         within("table.admin_index") do
           expect(page).to have_content(comment01.drama.name)
           expect(page).to have_content(comment02.drama.name)
-          expect(page).to have_selector("img,[src$="#{comment01.drama.image.filename}"]")
-          expect(page).to have_selector("img,[src$="#{comment02.drama.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{comment01.drama.image.filename}']")
+          expect(page).to have_selector("img,[src$='#{comment02.drama.image.filename}']")
         end
       end
 
@@ -98,7 +98,7 @@ feature "comment", type: :feature do
 
       it "ドラマ画像が表示されること" do
         within("div.drama_left") do
-          expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
         end
       end
 
@@ -139,7 +139,7 @@ feature "comment", type: :feature do
 
       it "ドラマ画像が表示されること" do
         within("div.drama_left") do
-          expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
         end
       end
 
@@ -184,7 +184,7 @@ feature "comment", type: :feature do
 
       it "ドラマ画像が表示されること" do
         within("div.drama_left") do
-          expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
         end
       end
 
@@ -226,7 +226,7 @@ feature "comment", type: :feature do
 
       it "ドラマ画像が表示されること" do
         within("div.drama_left") do
-          expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+          expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
         end
       end
 

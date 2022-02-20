@@ -20,7 +20,7 @@ feature "homes", type: :feature do
       end
       expect(page).to have_content("ドラマ管理ページ")
       expect(page).to have_content(drama.name)
-      expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+      expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
     end
 
     it "レビュー管理ページへのリンクが正しくされていること" do
@@ -30,7 +30,7 @@ feature "homes", type: :feature do
       end
       expect(page).to have_content("レビュー管理ページ")
       expect(page).to have_content(drama.name)
-      expect(page).to have_selector("img,[src$="#{drama.image.filename}"]")
+      expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
       drama.comments.each{|comment|
         expect(page).to have_content(comment.user.name)
       }
