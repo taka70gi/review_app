@@ -4,7 +4,7 @@
   <div class="layout_item_back dark_color font_white">
     <div class="admin_position">
       <h2 class="text_center font_pink">ユーザー管理ページ</h2>
-      <% if @users.count != 0 %>
+      <% if @users.count != 1 %>
         <div class="layout_item_back white_color dark_color_position">
           <table class="font_purple admin_index">
             <% @users.each do |user| %>
