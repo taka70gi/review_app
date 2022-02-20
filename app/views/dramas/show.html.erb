@@ -55,7 +55,7 @@
                 <% if @users.find(comment.user_id).image.attached? %>
                   <%= image_tag @users.find(comment.user_id).image, class: "user_icon" %>
                 <% else %>
-                  <img class="user_icon" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/default_icon-9263fc59c414b7228d256fc178dcb22183561357950a68f5ad086ba7ee054974.jpg" alt="アイコン"></img>
+                  <%= image_tag "default_icon.jpg", class: "user_icon" %>
                 <% end %>
               </td>
               <td class="drama_comment_wide">
