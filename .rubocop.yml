@@ -1,0 +1,47 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  rubocop-rails
+
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - 'db/**/*'
+    - 'Gemfile'
+    - 'node_modules/**/*'
+    - 'bin/*'
+    - 'lib/**'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'test/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - 'spec/**/*'
+    - 'app/models/favorite.rb'
+    - 'app/models/like.rb'
+    - 'app/models/user.rb'
+    - 'app/models/drama.rb'
+
+AsciiComments:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 165
+
+StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+RedundantReturn:
+  AllowMultipleReturnValues: true
