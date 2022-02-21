@@ -24,6 +24,7 @@ AllCops:
     - 'app/models/like.rb'
     - 'app/models/user.rb'
     - 'app/models/drama.rb'
+    - 'app/controllers/homes_controller.rb'
 
 AsciiComments:
   Enabled: false
