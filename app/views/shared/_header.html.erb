@@ -1,0 +1,53 @@
+<div class="header_layout">
+  <div class="header_list">
+    <div class="header_left">
+      <div class="header_title">
+        <%= link_to dramas_path do %>
+          <span class="page_title_m">韓ドラ</span><span class="page_title_s">レビュー</span>
+        <% end %>
+      </div>
+      <div class="header_search_field">
+        <%= form_with url: "/dramas/search", method: :get, local: true do |f| %>
+          <div class="search_position">
+            <%= f.text_field :keyword, value: @keyword, class: "field_size" %><br>
+            <%= f.submit "検索", class: "search_btn btn btn_color_purple" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% if user_signed_in? %>
+      <div class="header_right">
+        <div class="header_name">
+          <%= load_user.name %>
+        </div>
+        <div class="hamburger_wide">
+          <span class="hamburger_line"></span>
+          <span class="hamburger_line"></span>
+          <span class="hamburger_line"></span>
+        </div>
+        <ul class="header-nav-menu">
+          <% if load_user.admin? %>
+            <li><%= link_to "管理者ページ", homes_path, class: "string_layout_black" %></li>
+            <li><%= link_to "ドラマ管理ページ", admin_dramas_path, class: "string_layout_black" %></li>
+            <li><%= link_to "レビュー管理ページ", comments_path, class: "string_layout_black" %></li>
+            <li><%= link_to "ユーザー管理ページ", users_path, class: "string_layout_black" %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "string_layout_black" %></li>
+          <% else %>
+            <li><%= link_to "マイページ", user_path(load_user), class: "string_layout_black" %></li>
+            <li><%= link_to "アカウント編集", edit_user_path(load_user), class: "string_layout_black" %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "string_layout_black" %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% else %>
+      <lu class="header_right">
+        <li>
+          <%= link_to "ログイン", new_user_session_path, class: "" %>
+        </li>
+        <li>
+          <%= link_to "登録する", new_user_registration_path, class: "" %>
+        </li>
+      </lu>
+    <% end %>
+  </div>
+</div>

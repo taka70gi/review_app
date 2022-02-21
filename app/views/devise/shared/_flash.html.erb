@@ -1,0 +1,10 @@
+<% if flash[:notice] %>
+    <ul>
+        <li id="error_explanation"><%= flash[:notice] %>></li>
+    </ul>
+<% end %>
+<% if flash[:alert] %>
+    <ul>
+        <li id="error_explanation"><%= flash[:alert] %></li>
+    </ul>
+<% end %>

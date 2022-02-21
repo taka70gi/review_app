@@ -1,0 +1,20 @@
+<div class="layout_position">
+  <div class="layout_item_back white_color font_purple login_wide">
+    <h2 class="text_center">パスワードをお忘れの場合</h2>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="outer">
+        <div class="inner">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field_size" %>
+        </div>
+      </div>
+      <div class="padding_position text_center">
+        <%= f.submit "送信", class: "btn btn_color" %>
+      </div>
+    <% end %>
+    <div class="text_center padding_position">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

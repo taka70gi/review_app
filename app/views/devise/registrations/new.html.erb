@@ -1,0 +1,41 @@
+<div class="layout_position">
+  <div class="layout_item_back white_color font_purple login_wide">
+    <h2 class="text_center">新規登録</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="outer">
+        <div class="inner">
+          <div><%= f.label :name %></div>
+          <%= f.text_field :name, class: "field_size" %>
+        </div>
+      </div>
+      <div class="outer">
+        <div class="inner">
+          <div><%= f.label :email %></div>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field_size" %>
+        </div>
+      </div>
+      <div class="outer">
+        <div class="inner">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "field_size" %>
+        </div>
+      </div>
+      <div class="outer">
+        <div class="inner">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "field_size" %>
+        </div>
+      </div>
+      <div class="padding_position text_center">
+        <%= f.submit "登録", class: "btn btn_color" %>
+      </div>
+    <% end %>
+    <div class="text_center padding_position">
+      <div><%= render "devise/shared/links" %></div>
+    </div>
+  </div>
+</div>

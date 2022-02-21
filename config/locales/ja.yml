@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: "名前"
+      drama:
+        name: "タイトル"
+        summary: "あらすじ"
+        cast: "出演者"
+        image: "画像"
+        release_day: "公開年"
+      comment:
+        content: "レビュー内容"
+    models:
+      user: "ユーザー"
+      drama: "ドラマ"
+      comment: "レビュー"

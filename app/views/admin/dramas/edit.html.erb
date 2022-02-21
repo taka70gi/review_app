@@ -1,0 +1,45 @@
+<% provide(:title, "ドラマ更新") %>
+<%= render "shared/flash" %>
+<%= render "shared/error", obj: @drama %>
+<div class="layout_position">
+  <div class="layout_item_back dark_color font_white">
+    <div class="admin_position">
+      <h2 class="text_center font_pink">ドラマ更新</h2>
+      <div class="container">
+        <%= form_with model: @drama, url: admin_drama_path do |f| %>
+          <table>
+            <tr class="d_height">
+              <th class="d_padding"><%= f.label :name ,"名前" %></th>
+              <td class="border_none"><%= f.text_field :name, class: "field_size" %></td>
+            </tr>
+            <tr class="d_height">
+              <th class="d_padding"><%= f.label :release_day ,"公開年" %></th>
+              <td class="border_none"><%= f.text_field :release_day, class: "field_size" %></td>
+            </tr>
+            <tr class="d_height">
+              <th class="d_padding"><%= f.label :image ,"画像" %></th>
+              <td class="border_none"><%= f.file_field :image %></td>
+            </tr>
+            <tr class="d_height">
+              <th class="d_padding"><%= f.label :summary ,"あらすじ" %></th>
+              <td class="border_none"><%= f.text_area :summary, class: "area_size" %></td>
+            </tr>
+            <tr class="d_height">
+              <th class="d_padding"><%= f.label :cast ,"出演者" %></th>
+              <td class="border_none"><%= f.text_area :cast, class: "area_size" %></td>
+            </tr>
+          </table>
+          <div class="text_center">
+            <ul>
+              <li><%= f.submit "更新", class: "btn btn_color_purple"%></li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="return_link_position">
+  <div class="return_link"><%= link_to "管理者ページへ戻る", homes_path, class: "font_white" %></div>
+  <div><%= link_to "ドラマ管理ページへ戻る", admin_dramas_path, class: "font_white" %></div>
+</div>

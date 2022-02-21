@@ -1,0 +1,19 @@
+<% provide(:title, "検索結果") %>
+<div class="dark_color">
+  <div class="text_center font_white search_drama">検索結果:<%= @dramas.count %>件（検索ワード：<%= @key %>）</div>
+  <div class="layout_wide">
+    <div class="list">
+      <% @dramas.each do |drama| %>
+        <div class="drama_list recommend_img img_50 img_30 img_20 img_10">
+          <% if drama.image.attached? %>
+            <%= link_to (image_tag drama.image, class: "drama_img"), drama %>
+          <% end %>
+          <div class="color_gold name_size"><%= drama.name %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="return_link_position">
+    <div><%= link_to "一覧に戻る", :dramas, class: "font_white" %></div>
+  </div>
+</div>

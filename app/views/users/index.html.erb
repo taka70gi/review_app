@@ -1,0 +1,39 @@
+<% provide(:title, "管理者ページ") %>
+<%= render "shared/flash" %>
+<div class="layout_position">
+  <div class="layout_item_back dark_color font_white">
+    <div class="admin_position">
+      <h2 class="text_center font_pink">ユーザー管理ページ</h2>
+      <% if @users.count != 1 %>
+        <div class="layout_item_back white_color dark_color_position">
+          <table class="font_purple admin_index">
+            <% @users.each do |user| %>
+              <% if user.admin === false %>
+              <tr>
+                <td>
+                  <div>
+                    <% if user.image.attached? %>
+                      <%= image_tag user.image, class: "user_icon" %>
+                    <% else %>
+                      <%= image_tag "default_icon.jpg", class: "user_icon" %>
+                    <% end %>
+                  </div>
+                </td>
+                <td class="drama_name_wide">
+                  <div><%= user.name %></div>
+                </td>
+                <td  class="link_wide">
+                  <%= link_to "削除", user_path(user), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                </td>
+              </tr>
+              <% end %>
+            <% end %>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="return_link_position">
+  <div class="return_link"><%= link_to "管理者ページへ戻る", homes_path, class: "font_white" %></div>
+</div>

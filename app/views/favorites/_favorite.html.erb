@@ -1,0 +1,9 @@
+<% if drama.favorited_by(current_user) %>
+  <%= link_to drama_favorites_path(drama), method: :delete, class: "favorited_btn", remote: true do %>
+    <h4 class="link_margin"><span>★</span>お気に入り</h4>
+  <% end %>
+<% else %>
+  <%= link_to drama_favorites_path(drama), method: :post, class: "no_favorited_btn", remote: true do %>
+    <h4 class="link_margin"><span>★</span>お気に入り</h4>
+  <% end %>
+<% end %>

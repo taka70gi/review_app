@@ -1,0 +1,90 @@
+// Place all the styles related to the dramas controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.home_layout{
+  flex-wrap: wrap;
+}
+.list{
+  display: flex;
+  flex-wrap: wrap;
+}
+.recommend_img{
+  position: relative;
+  width: 100%;
+}
+.img_50{
+  flex: 0 0 50%;
+  max-width: 60%;
+}
+@media (min-width: 576px){
+  .img_30 {
+    flex: 0 0 30%;
+  }
+}
+@media (min-width: 788px){
+  .img_20 {
+    flex: 0 0 20%;
+  }
+}
+@media (min-width: 1052px){
+  .img_10 {
+      flex: 0 0 10%;
+  }
+}
+.area_img{
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+.drama_left {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.drama_right {
+  max-width: 600px;
+  margin: 0 20px;
+}
+.dark_color_position{
+  margin: 25px 135px;
+}
+.summary_head{
+  margin: 0px;
+  text-decoration:underline
+}
+.name_size{
+  width: 197px;
+  text-align: center;
+  font-size: 16px;
+  margin-left: 10px;
+  font-family: 游ゴシック;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.comment_name {
+  width: 70px;
+}
+.drama_comment_wide {
+  width: 777px;
+}
+.d_height{
+  height: 50px;
+}
+.d_padding{
+  padding: 20px;
+}
+.admin_position{
+  padding: 50px;
+}
+.comment_user_font{
+  font-size: 16px;
+  font-weight: bold;
+}
+.comment_font{
+  font-size: 13px;
+}
+.drama_app_wide{
+  width: 100px;
+}
