@@ -140,7 +140,6 @@ feature "application", type: :feature do
           within("ul.header-nav-menu") do
             expect(page).to have_content("管理者ページ")
             expect(page).to have_content("ドラマ管理ページ")
-            expect(page).to have_content("レビュー管理ページ")
             expect(page).to have_content("ログアウト")
           end
         end
@@ -156,13 +155,6 @@ feature "application", type: :feature do
           within("ul.header-nav-menu") do
             click_on "ドラマ管理ページ"
             expect(current_path).to eq admin_dramas_path
-          end
-        end
-
-        it "レビュー管理ページのリンクが正しくされていること" do
-          within("ul.header-nav-menu") do
-            click_on "レビュー管理ページ"
-            expect(current_path).to eq comments_path
           end
         end
 
@@ -232,12 +224,10 @@ feature "application", type: :feature do
         it "クリックするとナビバーが表示されること" do
           expect(page).to_not have_text("管理者ページ")
           expect(page).to_not have_text("ドラマ管理ページ")
-          expect(page).to_not have_text("レビュー管理ページ")
           expect(page).to_not have_text("ログアウト")
           find(".hamburger_wide").click
           expect(page).to have_text("管理者ページ")
           expect(page).to have_text("ドラマ管理ページ")
-          expect(page).to have_text("レビュー管理ページ")
           expect(page).to have_text("ログアウト")
         end
       end
