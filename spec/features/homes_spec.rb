@@ -22,21 +22,5 @@ feature "homes", type: :feature do
       expect(page).to have_content(drama.name)
       expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
     end
-
-    it "レビュー管理ページへのリンクが正しくされていること" do
-      within("div.admin_position") do
-        click_on "レビュー管理"
-        expect(current_path).to eq comments_path
-      end
-      expect(page).to have_content("レビュー管理ページ")
-      expect(page).to have_content(drama.name)
-      expect(page).to have_selector("img,[src$='#{drama.image.filename}']")
-      drama.comments.each{|comment|
-        expect(page).to have_content(comment.user.name)
-      }
-      expect(page).to have_content(general.name)
-      expect(page).to have_content(general.name)
-    end
   end
-
 end
